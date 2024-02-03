@@ -31,7 +31,7 @@ export class Game {
 
         const questions = new Array(num)
             .fill(null)
-            .map((_, index) => choose(banks)[index]).slice(0, 3);
+            .map((_, index) => choose(banks)[index]);
 
         const reserveQuestions = banks
             .flat()

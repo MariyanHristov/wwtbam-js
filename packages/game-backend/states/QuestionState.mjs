@@ -3,21 +3,25 @@ import {
     OrderedMap as ImmutableOrderedMap,
     Set as ImmutableSet,
 } from "immutable";
+
 import {State} from "./State.mjs";
 import {LeaderboardState} from "./LeaderboardState.mjs";
 import {ResultsState} from "./ResultsState.mjs";
+
 import {
     LIFELINES,
     LIFELINE_DOUBLE_DIP,
     LIFELINE_FIFTY_FIFTY,
     LIFELINE_SWITCH,
 } from "../const.mjs";
+
 import {shuffle} from "../random.mjs";
 
 const PAYOUT = [
-    100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 64000, 125000, 250000,
-    500000,
+    100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000,
+    250000, 500000, 1000000,
 ];
+
 const SAFETY_NETS = [32000, 1000, 0];
 
 export class QuestionState extends State {
@@ -91,7 +95,7 @@ export class QuestionState extends State {
         let earlyBirdPoints = 10 * this.gameData.players.size;
 
         for (const player of this.gameData.players) {
-            if(player.isPlaying) {
+            if (player.isPlaying) {
                 anyPlayersLeft = true;
 
                 player.points += earlyBirdPoints;
@@ -107,7 +111,8 @@ export class QuestionState extends State {
 
             if (correctAnswer) {
                 if (player.isPlaying) {
-                    const payout = PAYOUT[Math.min(currentQuestion, PAYOUT.length) - 1];
+                    const payout =
+                        PAYOUT[Math.min(currentQuestion, PAYOUT.length) - 1];
 
                     player.money += payout;
                     player.points += payout;
@@ -124,7 +129,8 @@ export class QuestionState extends State {
         }
 
         const targetState =
-            (currentQuestion === this.gameData.questions.length || !anyPlayersLeft)
+            currentQuestion === this.gameData.questions.length ||
+            !anyPlayersLeft
                 ? ResultsState
                 : LeaderboardState;
 
@@ -165,14 +171,10 @@ export class QuestionState extends State {
             (option) => option !== this.data.correctOption
         );
 
-        this.emit(
-            "send",
-            "removeAnswers",
-            {
-                playerID: player.id,
-                answers: shuffle(possibleToRemove).slice(0, 2),
-            }
-        );
+        this.emit("send", "removeAnswers", {
+            playerID: player.id,
+            answers: shuffle(possibleToRemove).slice(0, 2),
+        });
     }
 
     #onUseSwitch() {
@@ -183,7 +185,10 @@ export class QuestionState extends State {
                     this.data.correctOption;
 
             if (player.isPlaying && correctAnswer) {
-                player.points += PAYOUT[Math.min(Math.abs(this.data.number), PAYOUT.length) - 1];
+                player.points +=
+                    PAYOUT[
+                        Math.min(Math.abs(this.data.number), PAYOUT.length) - 1
+                    ];
             }
         }
 
