@@ -1,0 +1,112 @@
+[
+    {
+        "question": "What is the SI unit of force?",
+        "options": ["Newton", "Joule", "Watt", "Pascal"],
+        "correctOption": "Newton"
+    },
+    {
+        "question": "Which scientist is known for his laws of motion?",
+        "options": [
+            "Isaac Newton",
+            "Albert Einstein",
+            "Galileo Galilei",
+            "Niels Bohr"
+        ],
+        "correctOption": "Isaac Newton"
+    },
+    {
+        "question": "In the electromagnetic spectrum, which type of wave has the shortest wavelength?",
+        "options": ["Radio Waves", "Microwaves", "X-rays", "Gamma Rays"],
+        "correctOption": "Gamma Rays"
+    },
+    {
+        "question": "What is the speed of light in a vacuum?",
+        "options": [
+            "299,792 kilometers per second",
+            "150,000 kilometers per second",
+            "500,000 kilometers per second",
+            "1 million kilometers per second"
+        ],
+        "correctOption": "299,792 kilometers per second"
+    },
+    {
+        "question": "Which law states that the pressure of a gas is inversely proportional to its volume at constant temperature?",
+        "options": [
+            "Boyle's Law",
+            "Charles's Law",
+            "Gay-Lussac's Law",
+            "Avogadro's Law"
+        ],
+        "correctOption": "Boyle's Law"
+    },
+    {
+        "question": "What is the unit of electrical resistance?",
+        "options": ["Volt", "Ohm", "Ampere", "Watt"],
+        "correctOption": "Ohm"
+    },
+    {
+        "question": "In particle physics, what is the name of the hypothetical elementary particle that is its own antiparticle?",
+        "options": ["Quark", "Lepton", "Neutrino", "Majorana Particle"],
+        "correctOption": "Majorana Particle"
+    },
+    {
+        "question": "Which law of thermodynamics states that energy cannot be created or destroyed, only converted from one form to another?",
+        "options": ["Zeroth Law", "First Law", "Second Law", "Third Law"],
+        "correctOption": "First Law"
+    },
+    {
+        "question": "What is the phenomenon where a wave changes direction as it passes through a medium of different density?",
+        "options": ["Refraction", "Reflection", "Diffraction", "Interference"],
+        "correctOption": "Refraction"
+    },
+    {
+        "question": "Who developed the theory of general relativity?",
+        "options": [
+            "Isaac Newton",
+            "Albert Einstein",
+            "Werner Heisenberg",
+            "Max Planck"
+        ],
+        "correctOption": "Albert Einstein"
+    },
+    {
+        "question": "What is the fundamental charge of an electron?",
+        "options": ["-1", "0", "1", "2"],
+        "correctOption": "-1"
+    },
+    {
+        "question": "In quantum mechanics, what term describes the uncertainty in the position and momentum of a particle?",
+        "options": [
+            "Entropy",
+            "Wavefunction",
+            "Probability Density",
+            "Heisenberg Uncertainty Principle"
+        ],
+        "correctOption": "Heisenberg Uncertainty Principle"
+    },
+    {
+        "question": "Which fundamental force is responsible for holding protons and neutrons together in an atomic nucleus?",
+        "options": [
+            "Gravity",
+            "Electromagnetic Force",
+            "Weak Force",
+            "Strong Force"
+        ],
+        "correctOption": "Strong Force"
+    },
+    {
+        "question": "What is the name of the particle associated with the Higgs field, giving mass to other particles?",
+        "options": ["Boson", "Quark", "Lepton", "Photon"],
+        "correctOption": "Boson"
+    },
+    {
+        "question": "Which law states that the total electric flux through a closed surface is equal to the net electric charge inside the surface divided by the permittivity of free space?",
+        "options": [
+            "Gauss's Law",
+            "Ohm's Law",
+            "Faraday's Law",
+            "Ampere's Law"
+        ],
+        "correctOption": "Gauss's Law"
+    }
+]

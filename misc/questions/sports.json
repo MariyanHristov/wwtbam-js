@@ -1,0 +1,107 @@
+[
+    {
+        "question": "Which sport is known as 'The Beautiful Game'?",
+        "options": ["Basketball", "Soccer", "Tennis", "Cricket"],
+        "correctOption": "Soccer"
+    },
+    {
+        "question": "In what country did the sport of volleyball originate?",
+        "options": ["United States", "Brazil", "Russia", "Japan"],
+        "correctOption": "United States"
+    },
+    {
+        "question": "Who holds the record for the most Grand Slam singles titles in tennis?",
+        "options": [
+            "Roger Federer",
+            "Serena Williams",
+            "Rafael Nadal",
+            "Novak Djokovic"
+        ],
+        "correctOption": "Serena Williams"
+    },
+    {
+        "question": "Which country won the most gold medals in the 2020 Summer Olympics?",
+        "options": ["United States", "China", "Russia", "Japan"],
+        "correctOption": "United States"
+    },
+    {
+        "question": "In what year was the first modern Olympic Games held?",
+        "options": ["1886", "1896", "1906", "1916"],
+        "correctOption": "1896"
+    },
+    {
+        "question": "Who is the all-time leading scorer in the NBA?",
+        "options": [
+            "LeBron James",
+            "Kobe Bryant",
+            "Michael Jordan",
+            "Kareem Abdul-Jabbar"
+        ],
+        "correctOption": "Kareem Abdul-Jabbar"
+    },
+    {
+        "question": "Which horse won the Triple Crown in 2018, becoming the 13th horse in history to achieve this feat?",
+        "options": [
+            "American Pharoah",
+            "Justify",
+            "Secretariat",
+            "Seattle Slew"
+        ],
+        "correctOption": "Justify"
+    },
+    {
+        "question": "Who is the only athlete to win Olympic gold in both the 100 meters and 200 meters in three consecutive Olympic Games?",
+        "options": [
+            "Usain Bolt",
+            "Carl Lewis",
+            "Jesse Owens",
+            "Florence Griffith-Joyner"
+        ],
+        "correctOption": "Usain Bolt"
+    },
+    {
+        "question": "Which country hosted the 2016 Summer Olympics?",
+        "options": ["Brazil", "China", "Russia", "United States"],
+        "correctOption": "Brazil"
+    },
+    {
+        "question": "Who won the 2021 UEFA Champions League in soccer?",
+        "options": [
+            "Real Madrid",
+            "Manchester City",
+            "Chelsea",
+            "Bayern Munich"
+        ],
+        "correctOption": "Chelsea"
+    },
+    {
+        "question": "Which boxer was known as 'The Greatest' and 'The Champ'?",
+        "options": [
+            "Mike Tyson",
+            "Muhammad Ali",
+            "Floyd Mayweather",
+            "Sugar Ray Robinson"
+        ],
+        "correctOption": "Muhammad Ali"
+    },
+    {
+        "question": "In golf, what is the term for a score of one stroke under par on a hole?",
+        "options": ["Bogey", "Par", "Birdie", "Eagle"],
+        "correctOption": "Birdie"
+    },
+    {
+        "question": "Who holds the record for the most career home runs in Major League Baseball?",
+        "options": ["Babe Ruth", "Barry Bonds", "Hank Aaron", "Alex Rodriguez"],
+        "correctOption": "Barry Bonds"
+    },
+    {
+        "question": "Which country has won the most FIFA World Cup titles in men's soccer?",
+        "options": ["Brazil", "Germany", "Italy", "Argentina"],
+        "correctOption": "Brazil"
+    },
+    {
+        "question": "In which year did the first modern Winter Olympics take place?",
+        "options": ["1900", "1924", "1936", "1948"],
+        "correctOption": "1924"
+    }
+]

@@ -1,0 +1,137 @@
+[
+    {
+        "question": "Who is often regarded as a pioneer of modernist literature and wrote 'Mrs Dalloway'?",
+        "options": [
+            "D.H. Lawrence",
+            "Virginia Woolf",
+            "James Joyce",
+            "F. Scott Fitzgerald"
+        ],
+        "correctOption": "Virginia Woolf"
+    },
+    {
+        "question": "Which modernist novel follows the inner thoughts of Leopold Bloom over the course of a single day in Dublin?",
+        "options": [
+            "Ulysses",
+            "The Waste Land",
+            "A Portrait of the Artist as a Young Man",
+            "To the Lighthouse"
+        ],
+        "correctOption": "Ulysses"
+    },
+    {
+        "question": "Who wrote 'The Waste Land,' a landmark poem in modernist literature?",
+        "options": [
+            "T.S. Eliot",
+            "Ezra Pound",
+            "W.B. Yeats",
+            "Langston Hughes"
+        ],
+        "correctOption": "T.S. Eliot"
+    },
+    {
+        "question": "In 'To the Lighthouse,' what is the name of the family at the center of the narrative?",
+        "options": [
+            "The Ramsays",
+            "The Dalloways",
+            "The Buchanans",
+            "The Joyces"
+        ],
+        "correctOption": "The Ramsays"
+    },
+    {
+        "question": "Who wrote 'A Portrait of the Artist as a Young Man' and 'Ulysses'?",
+        "options": [
+            "Virginia Woolf",
+            "F. Scott Fitzgerald",
+            "James Joyce",
+            "E.M. Forster"
+        ],
+        "correctOption": "James Joyce"
+    },
+    {
+        "question": "What term is often used to describe the disillusionment and cynicism prevalent in much modernist literature after World War I?",
+        "options": [
+            "Lost Generation",
+            "Gothic Revival",
+            "Bloomsbury Group",
+            "Transcendentalism"
+        ],
+        "correctOption": "Lost Generation"
+    },
+    {
+        "question": "Which modernist poet is known for innovative use of language and punctuation, and wrote 'The Love Song of J. Alfred Prufrock'?",
+        "options": ["Ezra Pound", "W.B. Yeats", "Gertrude Stein", "T.S. Eliot"],
+        "correctOption": "T.S. Eliot"
+    },
+    {
+        "question": "In 'Mrs Dalloway,' what event is central to the plot and serves as a focal point for the characters' experiences?",
+        "options": ["A Wedding", "A Funeral", "A Party", "A War"],
+        "correctOption": "A Party"
+    },
+    {
+        "question": "Who is the author of 'The Great Gatsby,' a novel often considered as a modernist classic?",
+        "options": [
+            "F. Scott Fitzgerald",
+            "Ernest Hemingway",
+            "John Steinbeck",
+            "J.D. Salinger"
+        ],
+        "correctOption": "F. Scott Fitzgerald"
+    },
+    {
+        "question": "Which modernist writer and poet was associated with the Imagist movement and wrote 'The Cantos'?",
+        "options": [
+            "Ezra Pound",
+            "W.H. Auden",
+            "Langston Hughes",
+            "Marianne Moore"
+        ],
+        "correctOption": "Ezra Pound"
+    },
+    {
+        "question": "What novel by D.H. Lawrence explores the themes of love, class, and industrialization in England?",
+        "options": [
+            "Women in Love",
+            "Lady Chatterley's Lover",
+            "Sons and Lovers",
+            "The Rainbow"
+        ],
+        "correctOption": "Sons and Lovers"
+    },
+    {
+        "question": "Who wrote 'The Sun Also Rises,' a novel that captures the disillusionment of the post-World War I generation?",
+        "options": [
+            "F. Scott Fitzgerald",
+            "Ernest Hemingway",
+            "Gertrude Stein",
+            "John Dos Passos"
+        ],
+        "correctOption": "Ernest Hemingway"
+    },
+    {
+        "question": "In 'A Room of One's Own,' Virginia Woolf argues for what as a prerequisite for women to produce meaningful work?",
+        "options": ["Education", "Independence", "Privacy", "Wealth"],
+        "correctOption": "Independence"
+    },
+    {
+        "question": "Which modernist poet is known for his poems that explore the themes of love, nature, and the human experience, and wrote 'The Tower'?",
+        "options": [
+            "W.B. Yeats",
+            "Robert Frost",
+            "Wallace Stevens",
+            "Langston Hughes"
+        ],
+        "correctOption": "W.B. Yeats"
+    },
+    {
+        "question": "What is the name of the protagonist in 'The Catcher in the Rye' by J.D. Salinger?",
+        "options": [
+            "Holden Caulfield",
+            "Jay Gatsby",
+            "Nick Carraway",
+            "Scout Finch"
+        ],
+        "correctOption": "Holden Caulfield"
+    }
+]

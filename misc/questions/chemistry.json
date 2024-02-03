@@ -1,0 +1,97 @@
+[
+    {
+        "question": "What is the chemical symbol for water?",
+        "options": ["H2O", "CO2", "O2", "CH4"],
+        "correctOption": "H2O"
+    },
+    {
+        "question": "Which element is the most abundant in the Earth's crust?",
+        "options": ["Iron", "Silicon", "Oxygen", "Aluminum"],
+        "correctOption": "Oxygen"
+    },
+    {
+        "question": "What is the process of converting a solid directly into a gas called?",
+        "options": ["Condensation", "Sublimation", "Evaporation", "Melting"],
+        "correctOption": "Sublimation"
+    },
+    {
+        "question": "Which gas is responsible for the greenhouse effect on Earth?",
+        "options": ["Methane", "Carbon Dioxide", "Nitrous Oxide", "Ozone"],
+        "correctOption": "Carbon Dioxide"
+    },
+    {
+        "question": "Who is credited with the discovery of the periodic law and the periodic table?",
+        "options": [
+            "Dmitri Mendeleev",
+            "Marie Curie",
+            "Robert Boyle",
+            "Antoine Lavoisier"
+        ],
+        "correctOption": "Dmitri Mendeleev"
+    },
+    {
+        "question": "Which element is a noble gas and commonly used in lighting?",
+        "options": ["Krypton", "Argon", "Neon", "Helium"],
+        "correctOption": "Neon"
+    },
+    {
+        "question": "In chemical equations, what does the arrow signify?",
+        "options": [
+            "Transformation",
+            "Equalization",
+            "Reaction",
+            "Combination"
+        ],
+        "correctOption": "Reaction"
+    },
+    {
+        "question": "What is the unit of measurement for acidity or alkalinity of a solution?",
+        "options": ["pH", "ppm", "mol/L", "Molarity"],
+        "correctOption": "pH"
+    },
+    {
+        "question": "Which type of bond involves the sharing of electrons between atoms?",
+        "options": ["Ionic", "Covalent", "Metallic", "Polar"],
+        "correctOption": "Covalent"
+    },
+    {
+        "question": "What is the chemical formula for common table salt?",
+        "options": ["NaCl", "KCl", "HCl", "CaCl2"],
+        "correctOption": "NaCl"
+    },
+    {
+        "question": "Who won the Nobel Prize in Medicine for the discovery of the structure of DNA?",
+        "options": [
+            "James Watson",
+            "Isaac Newton",
+            "Rosalind Franklin",
+            "Linus Pauling"
+        ],
+        "correctOption": "James Watson"
+    },
+    {
+        "question": "What is the study of carbon-containing compounds called?",
+        "options": [
+            "Organology",
+            "Carbonology",
+            "Organic Chemistry",
+            "Carbon Chemistry"
+        ],
+        "correctOption": "Organic Chemistry"
+    },
+    {
+        "question": "Which gas is produced during photosynthesis?",
+        "options": ["Oxygen", "Carbon Dioxide", "Methane", "Nitrogen"],
+        "correctOption": "Oxygen"
+    },
+    {
+        "question": "What is the atomic number of gold?",
+        "options": ["77", "79", "82", "87"],
+        "correctOption": "79"
+    },
+    {
+        "question": "In nuclear reactions, what is the term for the spontaneous disintegration of a nucleus?",
+        "options": ["Fission", "Fusion", "Decay", "Transmutation"],
+        "correctOption": "Decay"
+    }
+]

@@ -1,0 +1,117 @@
+[
+    {
+        "question": "Who was the first President of the United States?",
+        "options": [
+            "John Adams",
+            "Thomas Jefferson",
+            "George Washington",
+            "James Madison"
+        ],
+        "correctOption": "George Washington"
+    },
+    {
+        "question": "Which ancient civilization is known for building the Great Pyramid of Giza?",
+        "options": ["Roman", "Greek", "Persian", "Egyptian"],
+        "correctOption": "Egyptian"
+    },
+    {
+        "question": "During which century did the Renaissance take place?",
+        "options": ["14th", "15th", "16th", "17th"],
+        "correctOption": "14th"
+    },
+    {
+        "question": "Who was the leader of the Soviet Union during World War II?",
+        "options": [
+            "Joseph Stalin",
+            "Vladimir Lenin",
+            "Leon Trotsky",
+            "Nikita Khrushchev"
+        ],
+        "correctOption": "Joseph Stalin"
+    },
+    {
+        "question": "What event marked the beginning of World War I?",
+        "options": [
+            "Assassination of Archduke Franz Ferdinand",
+            "Signing of the Treaty of Versailles",
+            "Battle of the Somme",
+            "Invasion of Poland"
+        ],
+        "correctOption": "Assassination of Archduke Franz Ferdinand"
+    },
+    {
+        "question": "Who was the famous queen of ancient Egypt known for her relationships with Julius Caesar and Mark Antony?",
+        "options": ["Cleopatra", "Nefertiti", "Hatshepsut", "Isis"],
+        "correctOption": "Cleopatra"
+    },
+    {
+        "question": "In what year did Christopher Columbus reach the Americas?",
+        "options": ["1492", "1512", "1620", "1776"],
+        "correctOption": "1492"
+    },
+    {
+        "question": "Which famous battle in 1066 marked the Norman conquest of England?",
+        "options": [
+            "Battle of Stamford Bridge",
+            "Battle of Bosworth",
+            "Battle of Agincourt",
+            "Battle of Hastings"
+        ],
+        "correctOption": "Battle of Hastings"
+    },
+    {
+        "question": "Who was the first emperor of China, known for the construction of the Great Wall?",
+        "options": ["Qin Shi Huang", "Han Wudi", "Kangxi", "Ming Taizu"],
+        "correctOption": "Qin Shi Huang"
+    },
+    {
+        "question": "Which U.S. president issued the Emancipation Proclamation during the Civil War?",
+        "options": [
+            "Abraham Lincoln",
+            "Andrew Johnson",
+            "Ulysses S. Grant",
+            "James Buchanan"
+        ],
+        "correctOption": "Abraham Lincoln"
+    },
+    {
+        "question": "Who was the leader of the Mongol Empire in the 13th century and the largest contiguous empire in history?",
+        "options": [
+            "Genghis Khan",
+            "Kublai Khan",
+            "Attila the Hun",
+            "Tamerlane"
+        ],
+        "correctOption": "Genghis Khan"
+    },
+    {
+        "question": "Which treaty officially ended World War I?",
+        "options": [
+            "Treaty of Versailles",
+            "Treaty of Brest-Litovsk",
+            "Treaty of Trianon",
+            "Treaty of Sevres"
+        ],
+        "correctOption": "Treaty of Versailles"
+    },
+    {
+        "question": "In what year did the United States declare its independence from Great Britain?",
+        "options": ["1765", "1776", "1789", "1801"],
+        "correctOption": "1776"
+    },
+    {
+        "question": "Who was the first woman to win a Nobel Prize and remains the only person to win Nobel Prizes in two different scientific fields?",
+        "options": [
+            "Marie Curie",
+            "Rosalind Franklin",
+            "Dorothy Crowfoot Hodgkin",
+            "Barbara McClintock"
+        ],
+        "correctOption": "Marie Curie"
+    },
+    {
+        "question": "Which ancient city was known for its Hanging Gardens, one of the Seven Wonders of the Ancient World?",
+        "options": ["Babylon", "Athens", "Rome", "Jerusalem"],
+        "correctOption": "Babylon"
+    }
+]

@@ -1,0 +1,107 @@
+[
+    {
+        "question": "What is the closest star to Earth?",
+        "options": [
+            "Proxima Centauri",
+            "Alpha Centauri",
+            "Betelgeuse",
+            "Sirius"
+        ],
+        "correctOption": "Proxima Centauri"
+    },
+    {
+        "question": "Which planet is known as the 'Red Planet'?",
+        "options": ["Venus", "Jupiter", "Mars", "Saturn"],
+        "correctOption": "Mars"
+    },
+    {
+        "question": "What is the name of the galaxy that contains our solar system?",
+        "options": [
+            "Andromeda Galaxy",
+            "Milky Way Galaxy",
+            "Triangulum Galaxy",
+            "Sombrero Galaxy"
+        ],
+        "correctOption": "Milky Way Galaxy"
+    },
+    {
+        "question": "Which moon of Jupiter is known for its intense volcanic activity and yellow-orange color?",
+        "options": ["Europa", "Io", "Ganymede", "Callisto"],
+        "correctOption": "Io"
+    },
+    {
+        "question": "What is the largest planet in our solar system?",
+        "options": ["Saturn", "Neptune", "Jupiter", "Uranus"],
+        "correctOption": "Jupiter"
+    },
+    {
+        "question": "What type of celestial object is a pulsar?",
+        "options": ["Planet", "Galaxy", "Star", "Neutron Star"],
+        "correctOption": "Neutron Star"
+    },
+    {
+        "question": "What is the phenomenon where light from a celestial body is blocked by another, as when the moon passes between the Earth and the sun?",
+        "options": ["Eclipse", "Occultation", "Transit", "Conjunction"],
+        "correctOption": "Eclipse"
+    },
+    {
+        "question": "What is the name of the region around a black hole from which nothing can escape, not even light?",
+        "options": [
+            "Event Horizon",
+            "Singularity",
+            "Photon Belt",
+            "Accretion Disk"
+        ],
+        "correctOption": "Event Horizon"
+    },
+    {
+        "question": "Which famous comet, visible from Earth, has an orbital period of approximately 76 years?",
+        "options": [
+            "Hale-Bopp",
+            "Halley's Comet",
+            "Comet ISON",
+            "Comet Lovejoy"
+        ],
+        "correctOption": "Halley's Comet"
+    },
+    {
+        "question": "What is the term for the explosion of a star, resulting in a sudden increase in brightness?",
+        "options": ["Supernova", "Nebula", "Quasar", "Black Hole"],
+        "correctOption": "Supernova"
+    },
+    {
+        "question": "Which space probe was the first to visit Pluto and its moons in 2015?",
+        "options": ["Voyager 1", "New Horizons", "Cassini", "Galileo"],
+        "correctOption": "New Horizons"
+    },
+    {
+        "question": "What is the name of the theory that suggests the universe began as an extremely hot and dense state and has been expanding ever since?",
+        "options": [
+            "Steady State Theory",
+            "Big Bang Theory",
+            "String Theory",
+            "Dark Matter Theory"
+        ],
+        "correctOption": "Big Bang Theory"
+    },
+    {
+        "question": "What is the term for the point in the sky directly above an observer?",
+        "options": ["Zenith", "Nadir", "Meridian", "Ecliptic"],
+        "correctOption": "Zenith"
+    },
+    {
+        "question": "Which telescope, launched in 1990, has provided breathtaking images of distant galaxies and nebulae?",
+        "options": [
+            "Hubble Space Telescope",
+            "Chandra X-ray Observatory",
+            "Kepler Space Telescope",
+            "Spitzer Space Telescope"
+        ],
+        "correctOption": "Hubble Space Telescope"
+    },
+    {
+        "question": "What is the term for a group of stars that form a pattern in the night sky, often named after mythological figures?",
+        "options": ["Constellation", "Galaxy", "Nebula", "Cluster"],
+        "correctOption": "Constellation"
+    }
+]
