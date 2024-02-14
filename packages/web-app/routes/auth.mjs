@@ -1,11 +1,12 @@
+import * as bcrypt from "bcrypt";
 import express from "express";
 import {body, validationResult} from "express-validator";
-import {query} from "../mysql.mjs";
-import * as bcrypt from "bcrypt";
-import secret from "../auth/secret.mjs";
 import jwt from "jsonwebtoken";
-import {verifyNoUser} from "../auth/verify-no-user.mjs";
+
+import {AUTH_SECRET} from "../../env/index.mjs";
+import {query} from "../mysql.mjs";
 import {useUser} from "../auth/use-user.mjs";
+import {verifyNoUser} from "../auth/verify-no-user.mjs";
 
 const router = express.Router();
 
@@ -56,7 +57,7 @@ router.post(
             ])
         );
 
-        const token = jwt.sign(payload, secret, {
+        const token = jwt.sign(payload, AUTH_SECRET, {
             expiresIn: "1h",
         });
 

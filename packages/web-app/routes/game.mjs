@@ -1,5 +1,4 @@
 import express from "express";
-import {body, validationResult} from "express-validator";
 
 import {verifyUser} from "../auth/verify-user.mjs";
 import {useUser} from "../auth/use-user.mjs";
@@ -7,7 +6,7 @@ import {useUser} from "../auth/use-user.mjs";
 // TEMP:
 import fs from "fs";
 import {v4 as uuid} from "uuid";
-import {RedisBus} from "../../bus/redis.mjs";
+import {createBus} from "../../bus/index.mjs";
 import {fileURLToPath} from "url";
 import {dirname} from "path";
 
@@ -18,15 +17,7 @@ router.get("/", useUser, verifyUser, (req, res) => {
 });
 
 router.get("/new", useUser, verifyUser, async (req, res) => {
-    const bus = new RedisBus({
-        server: {
-            socket: {
-                path: "/var/run/redis/redis-server.sock",
-            },
-        },
-        channel: "wwtbam",
-    });
-
+    const bus = createBus();
     await bus.connect();
 
     const dir = `${dirname(

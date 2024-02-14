@@ -1,20 +1,21 @@
-import "dotenv";
 import mysql from "mysql";
+
+import {DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USER} from "../env/index.mjs";
 
 const connectionPromise = new Promise((resolve, reject) => {
     const connection = mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
+        host: DB_HOST,
+        user: DB_USER,
+        password: DB_PASSWORD,
+        database: DB_DATABASE,
     });
 
     connection.connect((err) => {
         if (err) {
-            return reject(err);
+            reject(err);
+        } else {
+            resolve(connection);
         }
-
-        resolve(connection);
     });
 });
 

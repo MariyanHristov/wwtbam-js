@@ -1,18 +1,9 @@
-import "dotenv/config";
-
-import {RedisBus} from "../bus/redis.mjs";
+import {createBus} from "../bus/index.mjs";
 import {Game} from "./Game.mjs";
 
-const bus = new RedisBus({
-    server: {
-        socket: {
-            path: "/var/run/redis/redis-server.sock",
-        },
-    },
-    channel: "wwtbam",
-});
-
 const games = new Map();
+
+const bus = createBus();
 
 bus.on("message", (message) => {
     if (message.type === "newGame") {

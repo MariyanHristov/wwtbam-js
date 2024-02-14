@@ -1,7 +1,8 @@
 import cookieParser from "cookie-parser";
 import {WebSocketServer} from "ws";
+
 import {useUser} from "./auth/use-user.mjs";
-import {RedisBus} from "../bus/redis.mjs";
+import {createBus} from "../bus/index.mjs";
 
 const playerWS = new Map();
 const playerGames = new Map();
@@ -9,15 +10,7 @@ const playerGames = new Map();
 const wss = new WebSocketServer({clientTracking: false, noServer: true});
 
 wss.on("connection", async (ws, req) => {
-    const bus = new RedisBus({
-        server: {
-            socket: {
-                path: "/var/run/redis/redis-server.sock",
-            },
-        },
-        channel: "wwtbam",
-    });
-
+    const bus = createBus();
     await bus.connect();
 
     const playerID = req.loggedInUserID;
@@ -85,6 +78,8 @@ wss.on("connection", async (ws, req) => {
 });
 
 export function onUpgrade(req, socket, head) {
+    // Hack, we need cookies to parse the auth token.
+
     const parseCookies = cookieParser();
 
     parseCookies(req, {}, () => {

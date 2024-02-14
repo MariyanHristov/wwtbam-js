@@ -1,5 +1,5 @@
-import {createClient} from "redis";
 import EventEmitter from "events";
+import {createClient} from "redis";
 
 export class RedisBus extends EventEmitter {
     constructor(options) {
@@ -14,10 +14,7 @@ export class RedisBus extends EventEmitter {
     }
 
     async connect() {
-        await Promise.all([
-            this.sender.connect(),
-            this.receiver.connect(),
-        ]);
+        await Promise.all([this.sender.connect(), this.receiver.connect()]);
 
         await this.receiver.subscribe(this.channel, this.onMessageReceived);
     }
