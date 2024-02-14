@@ -1,21 +1,11 @@
-<%- include('../templates/head.ejs'); %> <%-
-include('../templates/navigation.ejs'); %>
+<% title = 'My Profile' %> <%- include('../templates/head.ejs'); %> <%- include('../templates/navigation.ejs'); %>
 <div class="container mt-5">
     <h1 class="mb-4">User Profile</h1>
 
-    <form action="/user/update" method="post">
-        <input type="hidden" name="id" value="<%= user.id %>" />
-
+    <form action="/user" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Name:</label>
-            <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="name"
-                value="<%= user.name %>"
-                required
-            />
+            <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" required />
         </div>
 
         <div class="mb-3">
@@ -32,36 +22,17 @@ include('../templates/navigation.ejs'); %>
 
         <div class="mb-3">
             <label for="city" class="form-label">City:</label>
-            <input
-                type="text"
-                class="form-control"
-                id="city"
-                name="city"
-                value="<%= user.city %>"
-                required
-            />
+            <input type="text" class="form-control" id="city" name="city" value="<%= user.city %>" required />
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
-            <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                value="<%= user.email %>"
-                required
-            />
+            <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required />
         </div>
 
         <div class="mb-3">
             <label for="country" class="form-label">Country:</label>
-            <img
-                src=""
-                alt="Selected Country Flag"
-                class="country-flag"
-                id="selectedCountryFlag"
-            />
+            <img src="" alt="Selected Country Flag" class="country-flag" id="selectedCountryFlag" />
             <select class="form-select" id="country" name="country" required>
                 <option value="" disabled>Select a country</option>
             </select>
@@ -109,9 +80,7 @@ include('../templates/navigation.ejs'); %>
                 .then((countryData) => {
                     updateFlag(countryData[0]);
                 })
-                .catch((error) =>
-                    console.error("Error fetching country flag:", error)
-                );
+                .catch((error) => console.error("Error fetching country flag:", error));
         } else {
             selectedCountryFlag.src = "";
         }

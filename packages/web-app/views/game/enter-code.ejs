@@ -1,10 +1,8 @@
-<%- include('../templates/head.ejs'); %> <%-
-include('../templates/navigation.ejs'); %>
+<% title = 'Enter code' %> <%- include('../templates/head.ejs'); %> <%- include('../templates/navigation.ejs'); %>
+
 <div class="container mt-5">
     <h1 class="mb-4">Insert the game code</h1>
-    <form
-        onsubmit="location.replace(`/game/${new FormData(this).get('code')}`); return false;"
-    >
+    <form onsubmit="location.replace(`/game/${new FormData(this).get('code')}`); return false;">
         <div class="mb-3">
             <label for="gameCode" class="form-label">Game Code:</label>
             <input
@@ -19,4 +17,5 @@ include('../templates/navigation.ejs'); %>
         <button type="submit" class="btn btn-primary">Join</button>
     </form>
 </div>
+
 <%- include('../templates/foot.ejs'); %>

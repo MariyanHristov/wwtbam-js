@@ -1,12 +1,13 @@
-import {Router} from "express";
+import { Router } from "express";
 
 import User from "../models/user/User.mjs";
+import { verifyUser } from "../auth/verify-user.mjs";
 
 const router = Router();
 
-router.get("/:id([0-9]+)", async (req, res) => {
+router.get("/", verifyUser, async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.loggedInUserID;
         const user = await User.getById(userId);
 
         if (!user) {
@@ -14,15 +15,15 @@ router.get("/:id([0-9]+)", async (req, res) => {
             return;
         }
 
-        res.render("user/userProfile", {user, title: "User Profile"});
+        res.render("user/userProfile", { user, title: "User Profile" });
     } catch (error) {
         res.status(500).send("yes");
     }
 });
 
-router.post("/update", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
-        const userId = req.body.id;
+        const userId = req.loggedInUserID;
         const user = await User.getById(userId);
 
         if (!user) {
@@ -31,12 +32,13 @@ router.post("/update", async (req, res) => {
         }
 
         user.setUser(req.body);
+        user.id = userId;
 
         await user.update((err, updatedUser) => {
             if (err) {
                 res.status(500).send("Internal Server Error");
             } else {
-                res.redirect(`/user/${updatedUser.id}`);
+                res.redirect(`/user`);
             }
         });
     } catch (error) {
