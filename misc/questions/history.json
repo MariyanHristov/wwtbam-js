@@ -1,12 +1,7 @@
 [
     {
         "question": "Who was the first President of the United States?",
-        "options": [
-            "John Adams",
-            "Thomas Jefferson",
-            "George Washington",
-            "James Madison"
-        ],
+        "options": ["John Adams", "Thomas Jefferson", "George Washington", "James Madison"],
         "correctOption": "George Washington"
     },
     {
@@ -21,12 +16,7 @@
     },
     {
         "question": "Who was the leader of the Soviet Union during World War II?",
-        "options": [
-            "Joseph Stalin",
-            "Vladimir Lenin",
-            "Leon Trotsky",
-            "Nikita Khrushchev"
-        ],
+        "options": ["Joseph Stalin", "Vladimir Lenin", "Leon Trotsky", "Nikita Khrushchev"],
         "correctOption": "Joseph Stalin"
     },
     {
@@ -51,12 +41,7 @@
     },
     {
         "question": "Which famous battle in 1066 marked the Norman conquest of England?",
-        "options": [
-            "Battle of Stamford Bridge",
-            "Battle of Bosworth",
-            "Battle of Agincourt",
-            "Battle of Hastings"
-        ],
+        "options": ["Battle of Stamford Bridge", "Battle of Bosworth", "Battle of Agincourt", "Battle of Hastings"],
         "correctOption": "Battle of Hastings"
     },
     {
@@ -66,32 +51,17 @@
     },
     {
         "question": "Which U.S. president issued the Emancipation Proclamation during the Civil War?",
-        "options": [
-            "Abraham Lincoln",
-            "Andrew Johnson",
-            "Ulysses S. Grant",
-            "James Buchanan"
-        ],
+        "options": ["Abraham Lincoln", "Andrew Johnson", "Ulysses S. Grant", "James Buchanan"],
         "correctOption": "Abraham Lincoln"
     },
     {
         "question": "Who was the leader of the Mongol Empire in the 13th century and the largest contiguous empire in history?",
-        "options": [
-            "Genghis Khan",
-            "Kublai Khan",
-            "Attila the Hun",
-            "Tamerlane"
-        ],
+        "options": ["Genghis Khan", "Kublai Khan", "Attila the Hun", "Tamerlane"],
         "correctOption": "Genghis Khan"
     },
     {
         "question": "Which treaty officially ended World War I?",
-        "options": [
-            "Treaty of Versailles",
-            "Treaty of Brest-Litovsk",
-            "Treaty of Trianon",
-            "Treaty of Sevres"
-        ],
+        "options": ["Treaty of Versailles", "Treaty of Brest-Litovsk", "Treaty of Trianon", "Treaty of Sevres"],
         "correctOption": "Treaty of Versailles"
     },
     {
@@ -101,12 +71,7 @@
     },
     {
         "question": "Who was the first woman to win a Nobel Prize and remains the only person to win Nobel Prizes in two different scientific fields?",
-        "options": [
-            "Marie Curie",
-            "Rosalind Franklin",
-            "Dorothy Crowfoot Hodgkin",
-            "Barbara McClintock"
-        ],
+        "options": ["Marie Curie", "Rosalind Franklin", "Dorothy Crowfoot Hodgkin", "Barbara McClintock"],
         "correctOption": "Marie Curie"
     },
     {

@@ -17,21 +17,13 @@ class QuestionBankWithQuestions {
         try {
             const questionBank = await QuestionBankDAL.getById(id);
 
-            const {title, description} = questionBank[0];
+            const { title, description } = questionBank[0];
 
-            const questions =
-                await QuestionsDAL.getQuestionsByQuestionBankId(id);
+            const questions = await QuestionsDAL.getQuestionsByQuestionBankId(id);
 
-            const parsedQuestions = Object.values(
-                JSON.parse(JSON.stringify(questions))
-            );
+            const parsedQuestions = Object.values(JSON.parse(JSON.stringify(questions)));
 
-            return new QuestionBankWithQuestions(
-                id,
-                title,
-                description,
-                parsedQuestions
-            );
+            return new QuestionBankWithQuestions(id, title, description, parsedQuestions);
         } catch (error) {
             console.error("ERR");
             throw error;

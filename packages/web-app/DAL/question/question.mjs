@@ -1,4 +1,4 @@
-import {query} from "../../mysql.mjs";
+import { query } from "../../mysql.mjs";
 
 const DAL = {
     insertQuestion: function (question, createUser, questionBankId) {
@@ -16,14 +16,12 @@ const DAL = {
                 questionBankId,
                 question.questionTypeId,
                 createUser,
-            ]
+            ],
         );
     },
 
     getQuestionsByQuestionBankId: function (questionBankId) {
-        return query("SELECT * FROM questions WHERE question_bank_id = ?", [
-            questionBankId,
-        ]);
+        return query("SELECT * FROM questions WHERE question_bank_id = ?", [questionBankId]);
     },
 };
 

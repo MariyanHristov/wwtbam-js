@@ -23,12 +23,12 @@ class User {
 
     static async getById(id, callback) {
         try {
-            const result = await DAL.getUser({id});
+            const result = await DAL.getUser({ id });
             if (result.length === 0) {
                 return null;
             }
 
-            const {name, family_name, city, email, country} = result[0];
+            const { name, family_name, city, email, country } = result[0];
             return new User(id, name, family_name, city, email, country);
         } catch (error) {
             console.error("Error retrieving user:", error.message);

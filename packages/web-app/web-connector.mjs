@@ -1,13 +1,13 @@
 import cookieParser from "cookie-parser";
-import {WebSocketServer} from "ws";
+import { WebSocketServer } from "ws";
 
-import {useUser} from "./auth/use-user.mjs";
-import {createBus} from "../bus/index.mjs";
+import { useUser } from "./auth/use-user.mjs";
+import { createBus } from "../bus/index.mjs";
 
 const playerWS = new Map();
 const playerGames = new Map();
 
-const wss = new WebSocketServer({clientTracking: false, noServer: true});
+const wss = new WebSocketServer({ clientTracking: false, noServer: true });
 
 wss.on("connection", async (ws, req) => {
     const bus = createBus();
@@ -27,7 +27,7 @@ wss.on("connection", async (ws, req) => {
         // Can only joinGame at the beginning
         if (!gameID) {
             if (message.type === "joinGame") {
-                await bus.send({...message, playerID});
+                await bus.send({ ...message, playerID });
                 playerGames.set(playerID, message.gameID);
             }
 
@@ -35,16 +35,10 @@ wss.on("connection", async (ws, req) => {
         }
 
         // Relay messages from player to server
-        const allowedFromPlayerToServer = [
-            "startGame",
-            "answerQuestion",
-            "useLifeline",
-            "continue",
-            "gameState",
-        ];
+        const allowedFromPlayerToServer = ["startGame", "answerQuestion", "useLifeline", "continue", "gameState"];
 
         if (allowedFromPlayerToServer.includes(message.type)) {
-            await bus.send({...message, gameID, playerID});
+            await bus.send({ ...message, gameID, playerID });
         }
     });
 
@@ -60,10 +54,7 @@ wss.on("connection", async (ws, req) => {
         }
 
         if (message.type === "removeAnswers") {
-            if (
-                playerWS.has(message.playerID) &&
-                playerGames.get(message.playerID) === message.gameID
-            ) {
+            if (playerWS.has(message.playerID) && playerGames.get(message.playerID) === message.gameID) {
                 playerWS.get(message.playerID).send(JSON.stringify(message));
             }
         }

@@ -1,6 +1,6 @@
-import {Set as ImmutableSet} from "immutable";
-import {State} from "./State.mjs";
-import {QuestionState} from "./QuestionState.mjs";
+import { Set as ImmutableSet } from "immutable";
+import { State } from "./State.mjs";
+import { QuestionState } from "./QuestionState.mjs";
 
 export class LeaderboardState extends State {
     constructor(gameData, data) {
@@ -17,14 +17,9 @@ export class LeaderboardState extends State {
             options: this.data.options,
             correctOption: this.data.correctOption,
             answers: Object.fromEntries(
-                [...this.data.answers.entries()].map(([player, answer]) => [
-                    player.id,
-                    answer,
-                ])
+                [...this.data.answers.entries()].map(([player, answer]) => [player.id, answer]),
             ),
-            continuedPlayers: [...this.data.continuedPlayers].map(
-                (player) => player.id
-            ),
+            continuedPlayers: [...this.data.continuedPlayers].map((player) => player.id),
         };
     }
 

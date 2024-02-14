@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import {createClient} from "redis";
+import { createClient } from "redis";
 
 export class RedisBus extends EventEmitter {
     constructor(options) {
@@ -26,10 +26,7 @@ export class RedisBus extends EventEmitter {
     async disconnect() {
         await this.receiver.unsubscribe();
 
-        await Promise.all([
-            this.sender.disconnect(),
-            this.receiver.disconnect(),
-        ]);
+        await Promise.all([this.sender.disconnect(), this.receiver.disconnect()]);
     }
 
     onMessageReceived(message) {

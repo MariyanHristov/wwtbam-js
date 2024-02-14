@@ -1,6 +1,6 @@
 import mysql from "mysql";
 
-import {DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USER} from "../env/index.mjs";
+import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USER } from "../env/index.mjs";
 
 const connectionPromise = new Promise((resolve, reject) => {
     const connection = mysql.createConnection({

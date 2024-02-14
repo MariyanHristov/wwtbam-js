@@ -21,12 +21,7 @@
     },
     {
         "question": "Who is credited with the discovery of the periodic law and the periodic table?",
-        "options": [
-            "Dmitri Mendeleev",
-            "Marie Curie",
-            "Robert Boyle",
-            "Antoine Lavoisier"
-        ],
+        "options": ["Dmitri Mendeleev", "Marie Curie", "Robert Boyle", "Antoine Lavoisier"],
         "correctOption": "Dmitri Mendeleev"
     },
     {
@@ -36,12 +31,7 @@
     },
     {
         "question": "In chemical equations, what does the arrow signify?",
-        "options": [
-            "Transformation",
-            "Equalization",
-            "Reaction",
-            "Combination"
-        ],
+        "options": ["Transformation", "Equalization", "Reaction", "Combination"],
         "correctOption": "Reaction"
     },
     {
@@ -61,22 +51,12 @@
     },
     {
         "question": "Who won the Nobel Prize in Medicine for the discovery of the structure of DNA?",
-        "options": [
-            "James Watson",
-            "Isaac Newton",
-            "Rosalind Franklin",
-            "Linus Pauling"
-        ],
+        "options": ["James Watson", "Isaac Newton", "Rosalind Franklin", "Linus Pauling"],
         "correctOption": "James Watson"
     },
     {
         "question": "What is the study of carbon-containing compounds called?",
-        "options": [
-            "Organology",
-            "Carbonology",
-            "Organic Chemistry",
-            "Carbon Chemistry"
-        ],
+        "options": ["Organology", "Carbonology", "Organic Chemistry", "Carbon Chemistry"],
         "correctOption": "Organic Chemistry"
     },
     {

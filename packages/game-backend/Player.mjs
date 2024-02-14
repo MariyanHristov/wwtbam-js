@@ -1,4 +1,4 @@
-import {Set as ImmutableSet} from "immutable";
+import { Set as ImmutableSet } from "immutable";
 
 export class Player {
     id;

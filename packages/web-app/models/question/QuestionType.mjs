@@ -1,4 +1,4 @@
-import DAL from '../../DAL/question/questionType.mjs';
+import DAL from "../../DAL/question/questionType.mjs";
 
 class QuestionType {
     constructor(id, type_title) {
@@ -16,9 +16,8 @@ class QuestionType {
 
             return result;
         } catch (error) {
-            console.error('Err');
+            console.error("Err");
             throw error;
         }
     }
-
 }

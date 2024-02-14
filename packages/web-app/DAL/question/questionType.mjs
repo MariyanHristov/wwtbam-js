@@ -1,4 +1,4 @@
-import {query} from "../../mysql.mjs";
+import { query } from "../../mysql.mjs";
 
 const DAL = {
     getAllQuestionTypes: function () {

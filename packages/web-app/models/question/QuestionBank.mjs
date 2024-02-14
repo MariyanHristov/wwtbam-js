@@ -1,4 +1,4 @@
-import DAL from '../../DAL/question/questionBank.mjs';
+import DAL from "../../DAL/question/questionBank.mjs";
 
 class QuestionBank {
     constructor(id, title, description, createUser) {
@@ -26,7 +26,7 @@ class QuestionBank {
             const { title, description, createUser } = result[0];
             return new QuestionBank(id, title, description, createUser);
         } catch (error) {
-            console.error('Err');
+            console.error("Err");
             throw error;
         }
     }

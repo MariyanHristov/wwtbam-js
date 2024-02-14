@@ -1,12 +1,7 @@
 [
     {
         "question": "What is the closest star to Earth?",
-        "options": [
-            "Proxima Centauri",
-            "Alpha Centauri",
-            "Betelgeuse",
-            "Sirius"
-        ],
+        "options": ["Proxima Centauri", "Alpha Centauri", "Betelgeuse", "Sirius"],
         "correctOption": "Proxima Centauri"
     },
     {
@@ -16,12 +11,7 @@
     },
     {
         "question": "What is the name of the galaxy that contains our solar system?",
-        "options": [
-            "Andromeda Galaxy",
-            "Milky Way Galaxy",
-            "Triangulum Galaxy",
-            "Sombrero Galaxy"
-        ],
+        "options": ["Andromeda Galaxy", "Milky Way Galaxy", "Triangulum Galaxy", "Sombrero Galaxy"],
         "correctOption": "Milky Way Galaxy"
     },
     {
@@ -46,22 +36,12 @@
     },
     {
         "question": "What is the name of the region around a black hole from which nothing can escape, not even light?",
-        "options": [
-            "Event Horizon",
-            "Singularity",
-            "Photon Belt",
-            "Accretion Disk"
-        ],
+        "options": ["Event Horizon", "Singularity", "Photon Belt", "Accretion Disk"],
         "correctOption": "Event Horizon"
     },
     {
         "question": "Which famous comet, visible from Earth, has an orbital period of approximately 76 years?",
-        "options": [
-            "Hale-Bopp",
-            "Halley's Comet",
-            "Comet ISON",
-            "Comet Lovejoy"
-        ],
+        "options": ["Hale-Bopp", "Halley's Comet", "Comet ISON", "Comet Lovejoy"],
         "correctOption": "Halley's Comet"
     },
     {
@@ -76,12 +56,7 @@
     },
     {
         "question": "What is the name of the theory that suggests the universe began as an extremely hot and dense state and has been expanding ever since?",
-        "options": [
-            "Steady State Theory",
-            "Big Bang Theory",
-            "String Theory",
-            "Dark Matter Theory"
-        ],
+        "options": ["Steady State Theory", "Big Bang Theory", "String Theory", "Dark Matter Theory"],
         "correctOption": "Big Bang Theory"
     },
     {

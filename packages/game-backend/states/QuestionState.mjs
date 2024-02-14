@@ -1,35 +1,20 @@
-import {
-    Map as ImmutableMap,
-    OrderedMap as ImmutableOrderedMap,
-    Set as ImmutableSet,
-} from "immutable";
+import { Map as ImmutableMap, OrderedMap as ImmutableOrderedMap, Set as ImmutableSet } from "immutable";
 
-import {State} from "./State.mjs";
-import {LeaderboardState} from "./LeaderboardState.mjs";
-import {ResultsState} from "./ResultsState.mjs";
+import { State } from "./State.mjs";
+import { LeaderboardState } from "./LeaderboardState.mjs";
+import { ResultsState } from "./ResultsState.mjs";
 
-import {
-    LIFELINES,
-    LIFELINE_DOUBLE_DIP,
-    LIFELINE_FIFTY_FIFTY,
-    LIFELINE_SWITCH,
-} from "../const.mjs";
+import { LIFELINES, LIFELINE_DOUBLE_DIP, LIFELINE_FIFTY_FIFTY, LIFELINE_SWITCH } from "../const.mjs";
 
-import {shuffle} from "../random.mjs";
+import { shuffle } from "../random.mjs";
 
-const PAYOUT = [
-    100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000,
-    250000, 500000, 1000000,
-];
+const PAYOUT = [100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000];
 
 const SAFETY_NETS = [32000, 1000, 0];
 
 export class QuestionState extends State {
     constructor(gameData, number) {
-        const question =
-            number < 0
-                ? gameData.reserveQuestions[gameData.nextReserve]
-                : gameData.questions[number - 1];
+        const question = number < 0 ? gameData.reserveQuestions[gameData.nextReserve] : gameData.questions[number - 1];
 
         super(gameData, "question", {
             number,
@@ -52,9 +37,7 @@ export class QuestionState extends State {
             isReserve: this.data.number < 0,
             question: this.data.question,
             options: this.data.options,
-            answeredPlayers: [...this.data.answers.keys()].map(
-                (player) => player.id
-            ),
+            answeredPlayers: [...this.data.answers.keys()].map((player) => player.id),
         };
     }
 
@@ -64,13 +47,9 @@ export class QuestionState extends State {
                 answers: (answers) => answers.set(player, message.answer),
             });
 
-            if (
-                message.additionalAnswer &&
-                this.data.usedDoubleDip.has(player)
-            ) {
+            if (message.additionalAnswer && this.data.usedDoubleDip.has(player)) {
                 this.update({
-                    additionalAnswers: (answers) =>
-                        answers.set(player, message.additionalAnswer),
+                    additionalAnswers: (answers) => answers.set(player, message.additionalAnswer),
                 });
             }
         }
@@ -103,13 +82,11 @@ export class QuestionState extends State {
 
             const correctAnswer =
                 this.data.answers.get(player) === this.data.correctOption ||
-                this.data.additionalAnswers.get(player) ===
-                    this.data.correctOption;
+                this.data.additionalAnswers.get(player) === this.data.correctOption;
 
             if (correctAnswer) {
                 if (player.isPlaying) {
-                    const payout =
-                        PAYOUT[Math.min(currentQuestion, PAYOUT.length) - 1];
+                    const payout = PAYOUT[Math.min(currentQuestion, PAYOUT.length) - 1];
 
                     player.money += payout;
                     player.points += payout;
@@ -125,14 +102,10 @@ export class QuestionState extends State {
             }
         }
 
-        const anyPlayersLeft =
-            this.gameData.players.find((player) => player.isPlaying) != null;
+        const anyPlayersLeft = this.gameData.players.find((player) => player.isPlaying) != null;
 
         const targetState =
-            currentQuestion === this.gameData.questions.length ||
-            !anyPlayersLeft
-                ? ResultsState
-                : LeaderboardState;
+            currentQuestion === this.gameData.questions.length || !anyPlayersLeft ? ResultsState : LeaderboardState;
 
         this.transition(targetState, {
             number: currentQuestion,
@@ -147,11 +120,7 @@ export class QuestionState extends State {
     onUseLifelineMessage(player, message) {
         const lifeline = message.lifeline;
 
-        if (
-            LIFELINES.includes(lifeline) &&
-            !player.usedLifelines.has(lifeline) &&
-            !this.data.answers.has(player)
-        ) {
+        if (LIFELINES.includes(lifeline) && !player.usedLifelines.has(lifeline) && !this.data.answers.has(player)) {
             player.usedLifelines = player.usedLifelines.add(lifeline);
 
             const callbacks = {
@@ -167,9 +136,7 @@ export class QuestionState extends State {
     }
 
     #onUseFiftyFifty(player) {
-        const possibleToRemove = this.data.options.filter(
-            (option) => option !== this.data.correctOption
-        );
+        const possibleToRemove = this.data.options.filter((option) => option !== this.data.correctOption);
 
         this.emit("send", "removeAnswers", {
             playerID: player.id,
@@ -181,14 +148,10 @@ export class QuestionState extends State {
         for (const player of this.gameData.players) {
             const correctAnswer =
                 this.data.answers.get(player) === this.data.correctOption ||
-                this.data.additionalAnswers.get(player) ===
-                    this.data.correctOption;
+                this.data.additionalAnswers.get(player) === this.data.correctOption;
 
             if (player.isPlaying && correctAnswer) {
-                player.points +=
-                    PAYOUT[
-                        Math.min(Math.abs(this.data.number), PAYOUT.length) - 1
-                    ];
+                player.points += PAYOUT[Math.min(Math.abs(this.data.number), PAYOUT.length) - 1];
             }
         }
 

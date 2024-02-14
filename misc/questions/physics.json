@@ -6,12 +6,7 @@
     },
     {
         "question": "Which scientist is known for his laws of motion?",
-        "options": [
-            "Isaac Newton",
-            "Albert Einstein",
-            "Galileo Galilei",
-            "Niels Bohr"
-        ],
+        "options": ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Niels Bohr"],
         "correctOption": "Isaac Newton"
     },
     {
@@ -31,12 +26,7 @@
     },
     {
         "question": "Which law states that the pressure of a gas is inversely proportional to its volume at constant temperature?",
-        "options": [
-            "Boyle's Law",
-            "Charles's Law",
-            "Gay-Lussac's Law",
-            "Avogadro's Law"
-        ],
+        "options": ["Boyle's Law", "Charles's Law", "Gay-Lussac's Law", "Avogadro's Law"],
         "correctOption": "Boyle's Law"
     },
     {
@@ -61,12 +51,7 @@
     },
     {
         "question": "Who developed the theory of general relativity?",
-        "options": [
-            "Isaac Newton",
-            "Albert Einstein",
-            "Werner Heisenberg",
-            "Max Planck"
-        ],
+        "options": ["Isaac Newton", "Albert Einstein", "Werner Heisenberg", "Max Planck"],
         "correctOption": "Albert Einstein"
     },
     {
@@ -76,22 +61,12 @@
     },
     {
         "question": "In quantum mechanics, what term describes the uncertainty in the position and momentum of a particle?",
-        "options": [
-            "Entropy",
-            "Wavefunction",
-            "Probability Density",
-            "Heisenberg Uncertainty Principle"
-        ],
+        "options": ["Entropy", "Wavefunction", "Probability Density", "Heisenberg Uncertainty Principle"],
         "correctOption": "Heisenberg Uncertainty Principle"
     },
     {
         "question": "Which fundamental force is responsible for holding protons and neutrons together in an atomic nucleus?",
-        "options": [
-            "Gravity",
-            "Electromagnetic Force",
-            "Weak Force",
-            "Strong Force"
-        ],
+        "options": ["Gravity", "Electromagnetic Force", "Weak Force", "Strong Force"],
         "correctOption": "Strong Force"
     },
     {
@@ -101,12 +76,7 @@
     },
     {
         "question": "Which law states that the total electric flux through a closed surface is equal to the net electric charge inside the surface divided by the permittivity of free space?",
-        "options": [
-            "Gauss's Law",
-            "Ohm's Law",
-            "Faraday's Law",
-            "Ampere's Law"
-        ],
+        "options": ["Gauss's Law", "Ohm's Law", "Faraday's Law", "Ampere's Law"],
         "correctOption": "Gauss's Law"
     }
 ]

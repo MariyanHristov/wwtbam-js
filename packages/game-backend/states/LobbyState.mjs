@@ -1,5 +1,5 @@
-import {State} from "./State.mjs";
-import {QuestionState} from "./QuestionState.mjs";
+import { State } from "./State.mjs";
+import { QuestionState } from "./QuestionState.mjs";
 
 export class LobbyState extends State {
     constructor(gameData) {

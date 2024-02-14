@@ -1,8 +1,17 @@
-import DAL from '../../DAL/question/question.mjs';
+import DAL from "../../DAL/question/question.mjs";
 
 class Question {
-    constructor(id, questionTitle, questionAnswerA, questionAnswerB, questionAnswerC, questionAnswerD,
-                questionCorrectAnswer, questionBankId, questionTypeId) {
+    constructor(
+        id,
+        questionTitle,
+        questionAnswerA,
+        questionAnswerB,
+        questionAnswerC,
+        questionAnswerD,
+        questionCorrectAnswer,
+        questionBankId,
+        questionTypeId,
+    ) {
         this.id = id;
         this.questionTitle = questionTitle;
         this.questionAnswerA = questionAnswerA;
@@ -23,7 +32,7 @@ class Question {
 
             return result;
         } catch (error) {
-            console.error('Err');
+            console.error("Err");
             throw error;
         }
     }

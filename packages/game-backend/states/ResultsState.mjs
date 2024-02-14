@@ -1,4 +1,4 @@
-import {State} from "./State.mjs";
+import { State } from "./State.mjs";
 
 export class ResultsState extends State {
     constructor(gameData, data) {
@@ -12,22 +12,14 @@ export class ResultsState extends State {
             options: this.data.options,
             correctOption: this.data.correctOption,
             answers: Object.fromEntries(
-                [...this.data.answers.entries()].map(([player, answer]) => [
-                    player.id,
-                    answer,
-                ])
+                [...this.data.answers.entries()].map(([player, answer]) => [player.id, answer]),
             ),
         };
     }
 
     onActivated() {
         this.emit("send", "playerScores", {
-            scores: Object.fromEntries(
-                [...this.gameData.players].map((player) => [
-                    player.id,
-                    player.points,
-                ])
-            ),
+            scores: Object.fromEntries([...this.gameData.players].map((player) => [player.id, player.points])),
         });
     }
 }

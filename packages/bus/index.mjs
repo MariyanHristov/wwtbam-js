@@ -1,5 +1,5 @@
-import {REDIS_CHANNEL, REDIS_PATH, REDIS_URL} from "../env/index.mjs";
-import {RedisBus} from "./redis.mjs";
+import { REDIS_CHANNEL, REDIS_PATH, REDIS_URL } from "../env/index.mjs";
+import { RedisBus } from "./redis.mjs";
 
 function createRedisBus() {
     const redis = REDIS_PATH
@@ -8,7 +8,7 @@ function createRedisBus() {
                   path: REDIS_PATH,
               },
           }
-        : {url: REDIS_URL};
+        : { url: REDIS_URL };
 
     const config = {
         server: redis,

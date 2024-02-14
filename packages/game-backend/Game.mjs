@@ -1,9 +1,9 @@
-import {Set as ImmutableSet} from "immutable";
+import { Set as ImmutableSet } from "immutable";
 import jwt from "jsonwebtoken";
-import {LobbyState} from "./states/LobbyState.mjs";
-import {Player} from "./Player.mjs";
-import {choose, shuffle} from "./random.mjs";
-import {AUTH_SECRET} from "../env/index.mjs";
+import { LobbyState } from "./states/LobbyState.mjs";
+import { Player } from "./Player.mjs";
+import { choose, shuffle } from "./random.mjs";
+import { AUTH_SECRET } from "../env/index.mjs";
 
 export class Game {
     id;
@@ -19,7 +19,7 @@ export class Game {
     lastUpdate = null;
     nextUpdate = null;
 
-    constructor(bus, id, {questions, reserveQuestions}) {
+    constructor(bus, id, { questions, reserveQuestions }) {
         this.id = id;
         this.questions = questions;
         this.reserveQuestions = reserveQuestions;
@@ -31,18 +31,11 @@ export class Game {
     static selectQuestions(banks) {
         const num = Math.min(...banks.map((bank) => bank.length));
 
-        const questions = new Array(num)
-            .fill(null)
-            .map((_, index) => choose(banks)[index]);
+        const questions = new Array(num).fill(null).map((_, index) => choose(banks)[index]);
 
         const reserveQuestions = banks
             .flat()
-            .filter(
-                (candidate) =>
-                    questions.find(
-                        (existing) => existing.question === candidate.question
-                    ) == null
-            );
+            .filter((candidate) => questions.find((existing) => existing.question === candidate.question) == null);
 
         return {
             questions,
@@ -62,20 +55,14 @@ export class Game {
                         this.#joinGame(
                             message.playerID,
                             Object.fromEntries(
-                                ["name", "family_name", "city", "country"].map(
-                                    (key) => [key, decoded[key]]
-                                )
-                            )
+                                ["name", "family_name", "city", "country"].map((key) => [key, decoded[key]]),
+                            ),
                         );
                     }
                 });
             } else {
-                const callbackName = `on${message.type
-                    .slice(0, 1)
-                    .toUpperCase()}${message.type.slice(1)}Message`;
-                const player = this.players.find(
-                    (player) => player.id === message.playerID
-                );
+                const callbackName = `on${message.type.slice(0, 1).toUpperCase()}${message.type.slice(1)}Message`;
+                const player = this.players.find((player) => player.id === message.playerID);
 
                 this.state[callbackName]?.(player, message);
             }
@@ -94,7 +81,7 @@ export class Game {
                 nextReserve: this.nextReserve,
                 players: this.players,
             },
-            ...args
+            ...args,
         );
 
         state.on("update", (data) => {
@@ -114,8 +101,7 @@ export class Game {
         });
 
         state.on("useReserve", () => {
-            this.nextReserve =
-                (this.nextReserve + 1) % this.reserveQuestions.length;
+            this.nextReserve = (this.nextReserve + 1) % this.reserveQuestions.length;
         });
 
         this.state = state;
@@ -152,9 +138,7 @@ export class Game {
             return;
         }
 
-        this.nextUpdate.sequence = this.lastUpdate
-            ? this.lastUpdate.sequence + 1
-            : 1;
+        this.nextUpdate.sequence = this.lastUpdate ? this.lastUpdate.sequence + 1 : 1;
 
         this.bus.send({
             type: "gameState",
@@ -167,9 +151,7 @@ export class Game {
 
     #joinGame(playerID, playerData) {
         if (this.state.canJoinGame(playerID)) {
-            const existing = this.players.find(
-                (player) => player.id == playerID
-            );
+            const existing = this.players.find((player) => player.id == playerID);
 
             if (existing != null) {
                 this.state.onJoinGame?.(existing);

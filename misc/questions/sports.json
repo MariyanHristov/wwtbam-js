@@ -11,12 +11,7 @@
     },
     {
         "question": "Who holds the record for the most Grand Slam singles titles in tennis?",
-        "options": [
-            "Roger Federer",
-            "Serena Williams",
-            "Rafael Nadal",
-            "Novak Djokovic"
-        ],
+        "options": ["Roger Federer", "Serena Williams", "Rafael Nadal", "Novak Djokovic"],
         "correctOption": "Serena Williams"
     },
     {
@@ -31,32 +26,17 @@
     },
     {
         "question": "Who is the all-time leading scorer in the NBA?",
-        "options": [
-            "LeBron James",
-            "Kobe Bryant",
-            "Michael Jordan",
-            "Kareem Abdul-Jabbar"
-        ],
+        "options": ["LeBron James", "Kobe Bryant", "Michael Jordan", "Kareem Abdul-Jabbar"],
         "correctOption": "Kareem Abdul-Jabbar"
     },
     {
         "question": "Which horse won the Triple Crown in 2018, becoming the 13th horse in history to achieve this feat?",
-        "options": [
-            "American Pharoah",
-            "Justify",
-            "Secretariat",
-            "Seattle Slew"
-        ],
+        "options": ["American Pharoah", "Justify", "Secretariat", "Seattle Slew"],
         "correctOption": "Justify"
     },
     {
         "question": "Who is the only athlete to win Olympic gold in both the 100 meters and 200 meters in three consecutive Olympic Games?",
-        "options": [
-            "Usain Bolt",
-            "Carl Lewis",
-            "Jesse Owens",
-            "Florence Griffith-Joyner"
-        ],
+        "options": ["Usain Bolt", "Carl Lewis", "Jesse Owens", "Florence Griffith-Joyner"],
         "correctOption": "Usain Bolt"
     },
     {
@@ -66,22 +46,12 @@
     },
     {
         "question": "Who won the 2021 UEFA Champions League in soccer?",
-        "options": [
-            "Real Madrid",
-            "Manchester City",
-            "Chelsea",
-            "Bayern Munich"
-        ],
+        "options": ["Real Madrid", "Manchester City", "Chelsea", "Bayern Munich"],
         "correctOption": "Chelsea"
     },
     {
         "question": "Which boxer was known as 'The Greatest' and 'The Champ'?",
-        "options": [
-            "Mike Tyson",
-            "Muhammad Ali",
-            "Floyd Mayweather",
-            "Sugar Ray Robinson"
-        ],
+        "options": ["Mike Tyson", "Muhammad Ali", "Floyd Mayweather", "Sugar Ray Robinson"],
         "correctOption": "Muhammad Ali"
     },
     {

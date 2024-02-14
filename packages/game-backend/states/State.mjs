@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import {Record} from "immutable";
+import { Record } from "immutable";
 
 export class State extends EventEmitter {
     name;
@@ -29,8 +29,8 @@ export class State extends EventEmitter {
     }
 
     update(values = {}) {
-        for(const [key, value] of Object.entries(values)) {
-            this.data = (value instanceof Function) ? this.data.update(key, value) : this.data.set(key, value);
+        for (const [key, value] of Object.entries(values)) {
+            this.data = value instanceof Function ? this.data.update(key, value) : this.data.set(key, value);
         }
 
         this.#sendUpdate();
