@@ -8,6 +8,10 @@ import morgan from "morgan";
 import {APP_PORT} from "../env/index.mjs";
 import authRouter from "./routes/auth.mjs";
 import gameRouter from "./routes/game.mjs";
+import homeRouter from "./routes/home.mjs";
+import questionBankBrowseRouter from "./routes/question-bank-browse.mjs";
+import questionBankRouter from "./routes/question-bank.mjs";
+import userRouter from "./routes/user.mjs";
 import {onUpgrade as onUpgradeToGame} from "./web-connector.mjs";
 
 const app = express();
@@ -24,8 +28,14 @@ app.set(
     path.join(path.dirname(fileURLToPath(import.meta.url)), "views")
 );
 
+app.use("/public", express.static("public"));
+
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
+app.use("/browse", questionBankBrowseRouter);
+app.use("/question-bank", questionBankRouter);
 app.use("/game", gameRouter);
+app.use("/", homeRouter);
 
 const server = app.listen(APP_PORT, () => {
     console.log(`Listening on port ${APP_PORT}`);

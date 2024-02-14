@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-3">
+    <h1 class="mb-4">Create question banks</h1>
+
+    <form action="/question-bank/edit" method="post">
+        <input type="hidden" name="id" value="<%= questionBank.id %>">
+
+        <div class="card mt-2">
+            <div class="card-title">
+                General information
+            </div>
+            <div class="card-body">
+                <div class="col-md mt-2">
+                    <div class="col-md-2">
+                        <label for="title" class="form-label">Title:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="title" name="title"
+                               value="<%= questionBank.title %>" required>
+                    </div>
+                </div>
+                <div class="col-md mt-1">
+                    <div class="col-md-2">
+                        <label for="description" class="form-label">Description:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="description" name="description"
+                               value="<%= questionBank.description %>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-title">
+                Questions
+            </div>
+            <div class="card-body">
+                <div id="questions">
+                    <% questionBank.questions.forEach(function(question, iter) { %>
+                        <div class="card mt-1 question">
+                            <div class="card-body">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-1">
+                                        <label for="questionTitle<%=iter%>" class="form-label text-right">Title:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionTitle<%=iter%>"
+                                               name="questions[<%=iter%>][question_title]"
+                                               value="<%= question.question_title %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row mt-2">
+                                    <div class="col-md-1">
+                                        <label for="questionAnswerA<%= iter %>" class="form-label text-right">A:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerA<%= iter %>"
+                                               name="questions[<%=iter%>][question_answer_a]"
+                                               value="<%= question.question_answer_a %>">
+                                    </div>
+                                    <div class="col-md-1 offset-md-6">
+                                        <label for="questionAnswerB<%= iter %>" class="form-label text-right">B:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerB<%= iter %>"
+                                               name="questions[<%=iter%>][question_answer_b]"
+                                               value="<%= question.question_answer_b %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row mt-1">
+                                    <div class="col-md-1">
+                                        <label for="questionAnswerC<%= iter %>" class="form-label text-right">C:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerC<%= iter %>"
+                                               name="questions[<%=iter%>][question_answer_c]"
+                                               value="<%= question.question_answer_c %>">
+                                    </div>
+                                    <div class="col-md-1 offset-md-6">
+                                        <label for="questionAnswerD<%= iter %>" class="form-label text-right">D:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerC<%= iter %>"
+                                               name="questions[<%=iter%>][question_answer_d]"
+                                               value="<%= question.question_answer_d %>">
+                                    </div>
+                                </div>
+                                <input type="hidden"
+                                       id="questionId<%= iter %>"
+                                       name="questions[<%=iter%>][id]"
+                                       value="<%= question.id %>">
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+                <div class="mt-3">
+                    <button id="add-question" type="button" class="btn btn-primary">
+                        Add question
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button id="save" type="submit" class="btn btn-success">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    let currQuestions = document.getElementsByClassName('question').length;
+    const maxQuestions = 20;
+
+    const newQuestion = `<div class="card mt-1 question">
+                            <div class="card-body">
+                                <div class="col-md-12 form-inline row">
+                                    <div class="col-md-1">
+                                        <label for="questionTitle${currQuestions}" class="form-label text-right">Title:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionTitle${currQuestions}"
+                                               name="questions[${currQuestions}][question_title]">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-inline row mt-2">
+                                    <div class="col-md-1">
+                                        <label for="questionAnswerA${currQuestions}" class="form-label text-right">A:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerA${currQuestions}"
+                                               name="questions[${currQuestions}][question_answer_a]">
+                                    </div>
+                                    <div class="col-md-1 offset-md-6">
+                                        <label for="questionAnswerB" class="form-label text-right">B:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerB${currQuestions}"
+                                               name="questions[${currQuestions}][question_answer_b]">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-inline row mt-1">
+                                    <div class="col-md-1">
+                                        <label for="questionAnswerC${currQuestions}" class="form-label text-right">C:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerC${currQuestions}"
+                                               name="questions[${currQuestions}][question_answer_c]">
+                                    </div>
+                                    <div class="col-md-1 offset-md-6">
+                                        <label for="questionAnswerD" class="form-label text-right">D:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="questionAnswerD${currQuestions}"
+                                               name="questions[${currQuestions}][question_answer_d]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+
+    document.getElementById('add-question').addEventListener('click', function () {
+
+        let tempDiv = document.createElement("div");
+
+        tempDiv.innerHTML = newQuestion;
+
+        document.getElementById('questions').appendChild(tempDiv.firstChild);
+
+        currQuestions++;
+    });
+</script>
+</body>
+</html>

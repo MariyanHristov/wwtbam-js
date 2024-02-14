@@ -1,0 +1,126 @@
+<%- include('../templates/head.ejs'); %> <%-
+include('../templates/navigation.ejs'); %>
+<div class="container mt-5">
+    <h1 class="mb-4">User Profile</h1>
+
+    <form action="/user/update" method="post">
+        <input type="hidden" name="id" value="<%= user.id %>" />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                value="<%= user.name %>"
+                required
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="family_name" class="form-label">Family Name:</label>
+            <input
+                type="text"
+                class="form-control"
+                id="family_name"
+                name="family_name"
+                value="<%= user.family_name %>"
+                required
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="city" class="form-label">City:</label>
+            <input
+                type="text"
+                class="form-control"
+                id="city"
+                name="city"
+                value="<%= user.city %>"
+                required
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                value="<%= user.email %>"
+                required
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Country:</label>
+            <img
+                src=""
+                alt="Selected Country Flag"
+                class="country-flag"
+                id="selectedCountryFlag"
+            />
+            <select class="form-select" id="country" name="country" required>
+                <option value="" disabled>Select a country</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
+
+<script>
+    fetch("https://restcountries.com/v3.1/all")
+        .then((response) => response.json())
+        .then((countries) => {
+            countries.sort((a, b) => {
+                const nameA = a.name.common.toLowerCase();
+                const nameB = b.name.common.toLowerCase();
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+
+            const countryDropdown = document.getElementById("country");
+            countries.forEach((country) => {
+                const option = document.createElement("option");
+                option.value = country.name.common;
+                option.textContent = country.name.common;
+
+                if (country.name.common === "<%= user.country %>") {
+                    option.selected = true;
+                    updateFlag(country);
+                }
+
+                countryDropdown.appendChild(option);
+            });
+        });
+
+    const countryDropdown = document.getElementById("country");
+    const selectedCountryFlag = document.getElementById("selectedCountryFlag");
+
+    countryDropdown.addEventListener("change", () => {
+        const selectedCountry = countryDropdown.value;
+        if (selectedCountry) {
+            fetch(`https://restcountries.com/v3.1/name/${selectedCountry}`)
+                .then((response) => response.json())
+                .then((countryData) => {
+                    updateFlag(countryData[0]);
+                })
+                .catch((error) =>
+                    console.error("Error fetching country flag:", error)
+                );
+        } else {
+            selectedCountryFlag.src = "";
+        }
+    });
+
+    function updateFlag(country) {
+        const flagUrl = country.flags.png;
+        selectedCountryFlag.src = flagUrl;
+    }
+</script>
+
+<%- include('../templates/foot.ejs'); %>
