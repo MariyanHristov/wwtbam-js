@@ -1,18 +1,13 @@
-import {Set as ImmutableSet} from "immutable";
 import {State} from "./State.mjs";
 import {QuestionState} from "./QuestionState.mjs";
 
 export class LobbyState extends State {
     constructor(gameData) {
-        super(gameData, "lobby", {
-            confirmedPlayers: new ImmutableSet()
-        });
+        super(gameData, "lobby", {});
     }
 
     serialize() {
-        return {
-            confirmedPlayers: [...this.data.confirmedPlayers].map((player) => player.serialize())
-        };
+        return {};
     }
 
     canJoinGame(playerID) {
@@ -20,13 +15,11 @@ export class LobbyState extends State {
     }
 
     onJoinGame(player) {
-        this.update({
-            confirmedPlayers: (players) => players.add(player)
-        });
+        this.update();
     }
 
     onStartGameMessage(player) {
-        if(player.isHost) {
+        if (player.isHost) {
             this.transition(QuestionState, 1);
         }
     }

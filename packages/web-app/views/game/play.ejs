@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Enter Code</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body>
+        <script src="//unpkg.com/alpinejs" defer></script>
+
+        <div
+            class="container"
+            x-data="{
+                game: { state: { type: 'unknown' } },
+                playerID: <%= JSON.stringify(playerID) %>,
+                lastQuestion: null,
+                lastAnswers: [],
+            }"
+            @gamestate.window="
+                game = $event.detail;
+
+                if(game.state.question != lastQuestion) {
+                    lastQuestion = game.state.question;
+                    lastAnswers = [];
+                }
+            "
+        >
+            <h1>Game</h1>
+            <p>
+                You have arrived. Current state:
+                <span x-text="game.state.type"></span>
+            </p>
+
+            <!-- Lobby -->
+            <template x-if="game.state.type === 'lobby'">
+                <div>
+                    <h2>Lobby</h2>
+                    <strong>Current players:</strong>
+                    <ul>
+                        <template x-for="player in game.players">
+                            <li
+                                x-text="`${(player.isHost) ? 'Host: ' : ''}${player.data.name} ${player.data.family_name}`"
+                            ></li>
+                        </template>
+                    </ul>
+                    <template
+                        x-if="game.players.find((player) => player.isHost)?.id == playerID"
+                    >
+                        <div>
+                            <div class="mb-3">
+                                <strong>Game code:</strong>
+                                <span
+                                    class="user-select-all"
+                                    x-text="game.gameID"
+                                ></span>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                @click="$dispatch('send', { type: 'startGame' })"
+                            >
+                                Start Game!
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Question -->
+            <template x-if="game.state.type === 'question'">
+                <div>
+                    <strong
+                        x-text="game.state.question"
+                        class="d-block text-center mb-3 fs-2"
+                    ></strong>
+                    <div
+                        class="d-grid gap-2"
+                        style="grid-template-columns: 1fr 1fr"
+                    >
+                        <template x-for="option in game.state.options">
+                            <button
+                                :class="{
+                                    'pe-none': (lastAnswers.length > 0),
+                                    btn: true,
+                                    'btn-primary': (lastAnswers.length === 0),
+                                    'btn-warning': (lastAnswers.length > 0 && lastAnswers.includes(option)),
+                                    'btn-secondary': (lastAnswers.length > 0 && !lastAnswers.includes(option)),
+                                }"
+                                x-text="option"
+                                @click="(lastAnswers.length === 0) && ($dispatch('send', { type: 'answerQuestion', answer: option }), (lastAnswers = [...lastAnswers, option]))"
+                            ></button>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Leaderboard / Results -->
+            <template
+                x-if="game.state.type === 'leaderboard' || game.state.type === 'results'"
+            >
+                <div>
+                    <template x-if="game.state.type === 'results'">
+                        <h2>Final Results</h2>
+                    </template>
+                    <strong
+                        x-text="game.state.question"
+                        class="d-block text-center mb-3 fs-2"
+                    ></strong>
+                    <div
+                        class="d-grid gap-2"
+                        style="grid-template-columns: 1fr 1fr"
+                    >
+                        <template x-for="option in game.state.options">
+                            <span
+                                :class="{
+                                    'pe-none': true,
+                                    btn: true,
+                                    'btn-success': option == game.state.correctOption,
+                                    'btn-danger': option != game.state.correctOption && game.state.answers?.[playerID] == option,
+                                    'btn-secondary': option != game.state.correctOption && game.state.answers?.[playerID] != option,
+                                }"
+                                x-text="option"
+                            ></span>
+                        </template>
+                    </div>
+                    <template x-if="game.state.type === 'leaderboard'">
+                        <div class="d-grid mt-3">
+                            <button
+                                class="btn btn-primary"
+                                :disabled="game.state.continuedPlayers.includes(playerID)"
+                                @click="!game.state.continuedPlayers.includes(playerID) && $dispatch('send', { type: 'continue' })"
+                            >
+                                Continue
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+
+        <script type="text/x-jwt" id="auth-cookie">
+            <%= auth %>
+        </script>
+
+        <script>
+            const authCookie = document
+                .getElementById("auth-cookie")
+                .innerText.trim();
+
+            document.addEventListener("alpine:initialized", () => {
+                const ws = new WebSocket(`ws://${location.host}/game`);
+
+                // ws.onerror =  () => {
+                //     showMessage("WebSocket error");
+                // };
+
+                ws.onopen = () => {
+                    const url = new URL(window.location.href);
+                    const gameID = url.pathname.slice(
+                        url.pathname.lastIndexOf("/") + 1
+                    );
+
+                    ws.send(
+                        JSON.stringify({
+                            type: "joinGame",
+                            data: authCookie,
+                            gameID,
+                        })
+                    );
+                };
+
+                ws.onmessage = (event) => {
+                    const message = JSON.parse(event.data);
+
+                    window.dispatchEvent(
+                        new CustomEvent(message.type.toLowerCase(), {
+                            detail: message,
+                        })
+                    );
+
+                    console.log(message);
+                };
+
+                window.addEventListener("send", (event) => {
+                    ws.send(JSON.stringify(event.detail));
+                });
+
+                // ws.onclose = () => {
+                //     showMessage("WebSocket connection closed");
+                // };
+
+                window.ws = ws;
+            });
+        </script>
+    </body>
+</html>

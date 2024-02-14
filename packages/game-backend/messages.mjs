@@ -1,4 +1,10 @@
 /**
+ * @typedef {Object} NewGameMessage
+ * @property {string} id
+ * @property {Object} questions
+ */
+
+/**
  * @typedef {Object} JoinGameMessage
  * @property {"joinGame"} type
  * @property {string} gameID

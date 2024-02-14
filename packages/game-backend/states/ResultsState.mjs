@@ -11,17 +11,23 @@ export class ResultsState extends State {
             question: this.data.question,
             options: this.data.options,
             correctOption: this.data.correctOption,
-            answers: Object.fromEntries([...this.data.answers.entries()].map(([player, answer]) => [player.id, answer])),
+            answers: Object.fromEntries(
+                [...this.data.answers.entries()].map(([player, answer]) => [
+                    player.id,
+                    answer,
+                ])
+            ),
         };
     }
 
     onActivated() {
-        this.emit(
-            "send",
-            "playerScores",
-            {
-                scores: Object.fromEntries([...this.gameData.players].map((player) => [player.id, player.score]))
-            }
-        );
+        this.emit("send", "playerScores", {
+            scores: Object.fromEntries(
+                [...this.gameData.players].map((player) => [
+                    player.id,
+                    player.points,
+                ])
+            ),
+        });
     }
 }

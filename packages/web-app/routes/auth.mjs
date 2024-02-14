@@ -1,38 +1,38 @@
 import express from "express";
-import { body, validationResult } from "express-validator";
-import { query } from "../mysql.mjs";
+import {body, validationResult} from "express-validator";
+import {query} from "../mysql.mjs";
 import * as bcrypt from "bcrypt";
 import secret from "../auth/secret.mjs";
 import jwt from "jsonwebtoken";
-import { verifyNoUser } from "../auth/verify-no-user.mjs";
-import { useUser } from "../auth/use-user.mjs";
+import {verifyNoUser} from "../auth/verify-no-user.mjs";
+import {useUser} from "../auth/use-user.mjs";
 
 const router = express.Router();
 
 router.get("/login", useUser, verifyNoUser, (req, res) => {
-    res.render("auth/login", { errors: null });
+    res.render("auth/login", {errors: null});
 });
 
 router.post(
     "/login",
-    useUser, verifyNoUser,
+    useUser,
+    verifyNoUser,
     body("email").notEmpty().isEmail().normalizeEmail(),
     body("password").notEmpty(),
     async (req, res) => {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            return res.render("auth/login", { errors: errors.mapped() });
+            return res.render("auth/login", {errors: errors.mapped()});
         }
 
-        const found = await query(
-            "select `id`, `password` from `users` where `email` = ?",
-            [req.body.email],
-        );
+        const found = await query("select * from `users` where `email` = ?", [
+            req.body.email,
+        ]);
 
         if (found.length === 0) {
             return res.render("auth/login", {
-                errors: { email: { msg: "Invalid credentials" } },
+                errors: {email: {msg: "Invalid credentials"}},
             });
         }
 
@@ -40,23 +40,30 @@ router.post(
 
         const passwordIsValid = await bcrypt.compare(
             req.body.password,
-            user.password,
+            user.password
         );
 
         if (!passwordIsValid) {
             return res.render("auth/login", {
-                errors: { email: { msg: "Invalid credentials" } },
+                errors: {email: {msg: "Invalid credentials"}},
             });
         }
 
-        const token = jwt.sign({ id: user.id }, secret, {
+        const payload = Object.fromEntries(
+            ["id", "name", "family_name", "city", "country"].map((key) => [
+                key,
+                user[key],
+            ])
+        );
+
+        const token = jwt.sign(payload, secret, {
             expiresIn: "1h",
         });
 
-        res.cookie("auth", token, { httpOnly: true });
+        res.cookie("auth", token, {httpOnly: true});
 
         res.redirect("/");
-    },
+    }
 );
 
 router.get("/register", useUser, verifyNoUser, (req, res) => {
@@ -65,7 +72,8 @@ router.get("/register", useUser, verifyNoUser, (req, res) => {
 
 router.post(
     "/register",
-    useUser, verifyNoUser,
+    useUser,
+    verifyNoUser,
     body("first_name").isAlpha(),
     body("last_name").isAlpha(),
     body("email").isEmail().normalizeEmail(),
@@ -82,7 +90,7 @@ router.post(
 
         const found = await query(
             "select count(*) as `result` from `users` where `email` = ?",
-            [req.body.email],
+            [req.body.email]
         );
 
         if (found[0].result > 0) {
@@ -93,7 +101,7 @@ router.post(
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         await query(
-            "insert into `users` (`name`, `familyName`, `city`, `email`, `password`, country) values (?, ?, ?, ?, ?, ?)",
+            "insert into `users` (`name`, `family_name`, `city`, `email`, `password`, country) values (?, ?, ?, ?, ?, ?)",
             [
                 req.body.first_name,
                 req.body.last_name,
@@ -101,11 +109,11 @@ router.post(
                 req.body.email,
                 hashedPassword,
                 "",
-            ],
+            ]
         );
 
         res.redirect("/auth/login");
-    },
+    }
 );
 
 export default router;

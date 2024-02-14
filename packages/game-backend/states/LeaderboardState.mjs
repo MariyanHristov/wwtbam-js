@@ -16,17 +16,24 @@ export class LeaderboardState extends State {
             question: this.data.question,
             options: this.data.options,
             correctOption: this.data.correctOption,
-            answers: Object.fromEntries([...this.data.answers.entries()].map(([player, answer]) => [player.id, answer])),
-            continuedPlayers: [...this.data.continuedPlayers].map((player) => player.serialize())
+            answers: Object.fromEntries(
+                [...this.data.answers.entries()].map(([player, answer]) => [
+                    player.id,
+                    answer,
+                ])
+            ),
+            continuedPlayers: [...this.data.continuedPlayers].map(
+                (player) => player.id
+            ),
         };
     }
 
     onContinueMessage(player) {
         this.update({
-            continuedPlayers: (players) => players.add(player)
+            continuedPlayers: (players) => players.add(player),
         });
 
-        if(this.data.continuedPlayers.size === this.gameData.players.size) {
+        if (this.data.continuedPlayers.size === this.gameData.players.size) {
             this.transition(QuestionState, this.data.number + 1);
         }
     }

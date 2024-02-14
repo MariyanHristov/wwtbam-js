@@ -52,8 +52,8 @@ export class QuestionState extends State {
             isReserve: this.data.number < 0,
             question: this.data.question,
             options: this.data.options,
-            answeredPlayers: [...this.data.answers.keys()].map((player) =>
-                player.serialize()
+            answeredPlayers: [...this.data.answers.keys()].map(
+                (player) => player.id
             ),
         };
     }
@@ -91,13 +91,10 @@ export class QuestionState extends State {
         // - if the game is lost, you lose 5 points per dollar earned after safety net, rounded to 5
         // - after losing, you get 10 points per correct answer
 
-        let anyPlayersLeft = false;
         let earlyBirdPoints = 10 * this.gameData.players.size;
 
         for (const player of this.gameData.players) {
             if (player.isPlaying) {
-                anyPlayersLeft = true;
-
                 player.points += earlyBirdPoints;
 
                 earlyBirdPoints /= 2;
@@ -127,6 +124,9 @@ export class QuestionState extends State {
                 player.isPlaying = false;
             }
         }
+
+        const anyPlayersLeft =
+            this.gameData.players.find((player) => player.isPlaying) != null;
 
         const targetState =
             currentQuestion === this.gameData.questions.length ||

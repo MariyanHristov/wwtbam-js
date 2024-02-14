@@ -8,19 +8,13 @@ export function useUser(req, res, next) {
         return next();
     }
 
-    jwt.verify(authCookie, secret, function (error, decoded) {
-        if(error) {
-            res.json({
-                status: 403,
-                message: "Invalid login.",
-                error,
-            });
-
-            return;
+    jwt.verify(authCookie, secret, (error, decoded) => {
+        if (!error) {
+            // Save to request for use in routes
+            req.loggedInUserID = decoded.id;
+            req.loggedInUserData = decoded;
         }
 
-        // if everything good, save to request for use in other routes
-        req.loggedInUserID = decoded.id;
         next();
     });
 }

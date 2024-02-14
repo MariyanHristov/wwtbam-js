@@ -1,4 +1,5 @@
 import {Set as ImmutableSet} from "immutable";
+import jwt from "jsonwebtoken";
 import {LobbyState} from "./states/LobbyState.mjs";
 import {Player} from "./Player.mjs";
 import {choose, shuffle} from "./random.mjs";
@@ -54,7 +55,26 @@ export class Game {
         try {
             if (message.type === "joinGame") {
                 // New players have to be handled specially as they also update the Game
-                this.#joinGame(message.playerID);
+
+                jwt.verify(
+                    message.data,
+                    process.env.AUTH_SECRET,
+                    (error, decoded) => {
+                        if (!error) {
+                            this.#joinGame(
+                                message.playerID,
+                                Object.fromEntries(
+                                    [
+                                        "name",
+                                        "family_name",
+                                        "city",
+                                        "country",
+                                    ].map((key) => [key, decoded[key]])
+                                )
+                            );
+                        }
+                    }
+                );
             } else {
                 const callbackName = `on${message.type
                     .slice(0, 1)
@@ -95,12 +115,13 @@ export class Game {
             this.bus.send({
                 type,
                 gameID: this.id,
-                ...body
+                ...body,
             });
         });
 
         state.on("useReserve", () => {
-            this.nextReserve = (this.nextReserve + 1) % this.reserveQuestions.length;
+            this.nextReserve =
+                (this.nextReserve + 1) % this.reserveQuestions.length;
         });
 
         this.state = state;
@@ -150,9 +171,18 @@ export class Game {
         this.nextUpdate = null;
     }
 
-    #joinGame(playerID) {
+    #joinGame(playerID, playerData) {
         if (this.state.canJoinGame(playerID)) {
-            const player = new Player(playerID);
+            const existing = this.players.find(
+                (player) => player.id == playerID
+            );
+
+            if (existing != null) {
+                this.state.onJoinGame?.(existing);
+                return;
+            }
+
+            const player = new Player(playerID, playerData);
 
             if (this.players.size === 0) {
                 player.isHost = true;
