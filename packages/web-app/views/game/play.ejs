@@ -7,17 +7,25 @@
     x-data="{
             game: { state: { type: 'unknown' } },
             playerID: <%= JSON.stringify(playerID) %>,
+            player: null,
             lastQuestion: null,
             lastAnswers: [],
+            removedAnswers: [],
+            needAnswers: 1,
         }"
     @gamestate.window="
             game = $event.detail;
 
-            if(game.state.question != lastQuestion) {
+            player = game.players.find((player) => player.id == playerID);
+
+            if(game.state.type !== 'question' || game.state.question != lastQuestion) {
                 lastQuestion = game.state.question;
                 lastAnswers = [];
+                removedAnswers = [];
+                needAnswers = 1;
             }
         "
+    @removeanswers.window="removedAnswers = $event.detail.answers"
 >
     <!-- Lobby -->
     <template x-if="game.state.type === 'lobby'">
@@ -31,7 +39,7 @@
                     ></li>
                 </template>
             </ul>
-            <template x-if="game.players.find((player) => player.isHost)?.id == playerID">
+            <template x-if="player.isHost">
                 <div>
                     <div class="mb-3">
                         <strong>Game code:</strong>
@@ -47,22 +55,49 @@
 
     <!-- Question -->
     <template x-if="game.state.type === 'question'">
-        <div>
-            <strong x-text="game.state.question" class="d-block text-center mb-3 fs-2"></strong>
-            <div class="d-grid gap-2" style="grid-template-columns: 1fr 1fr">
-                <template x-for="option in game.state.options">
-                    <button
-                        :class="{
-                                'pe-none': (lastAnswers.length > 0),
-                                btn: true,
-                                'btn-primary': (lastAnswers.length === 0),
-                                'btn-warning': (lastAnswers.length > 0 && lastAnswers.includes(option)),
-                                'btn-secondary': (lastAnswers.length > 0 && !lastAnswers.includes(option)),
+        <div class="row">
+            <div class="col-9">
+                <strong x-text="game.state.question" class="d-block text-center mb-3 fs-2"></strong>
+                <div class="d-grid gap-2" style="grid-template-columns: 1fr 1fr">
+                    <template x-for="option in game.state.options">
+                        <button
+                            :class="{
+                                    'pe-none': (lastAnswers.length >= needAnswers || removedAnswers.includes(option)),
+                                    btn: true,
+                                    'btn-primary': !lastAnswers.includes(option),
+                                    'btn-warning': lastAnswers.includes(option),
+                                }"
+                            :disabled="lastAnswers.includes(option)"
+                            x-text="removedAnswers.includes(option) ? ' ' : option"
+                            @click="if(!removedAnswers.includes(option)) {
+                                lastAnswers = [...lastAnswers, option];
+
+                                if(lastAnswers.length === needAnswers) {
+                                    $dispatch('send', {
+                                        type: 'answerQuestion',
+                                        answer: lastAnswers[0],
+                                        additionalAnswer: lastAnswers[1]
+                                    });
+                                }
                             }"
-                        x-text="option"
-                        @click="(lastAnswers.length === 0) && ($dispatch('send', { type: 'answerQuestion', answer: option }), (lastAnswers = [...lastAnswers, option]))"
-                    ></button>
-                </template>
+                        ></button>
+                    </template>
+                </div>
+            </div>
+            <div class="col">
+                <strong>Lifelines</strong>
+                <div class="d-flex gap-1">
+                    <template
+                        x-for="(name, key) in {fiftyfifty: 'Fifty-fifty', switch: 'Switch', doubledip: 'Double Dip'}"
+                    >
+                        <button
+                            class="btn btn-primary"
+                            x-text="name"
+                            :disabled="player.usedLifelines.includes(key)"
+                            @click="!player.usedLifelines.includes(key) && ($dispatch('send', { type: 'useLifeline', lifeline: key }), (key === 'doubledip' && (needAnswers = 2)))"
+                        ></button>
+                    </template>
+                </div>
             </div>
         </div>
     </template>
@@ -81,8 +116,8 @@
                                 'pe-none': true,
                                 btn: true,
                                 'btn-success': option == game.state.correctOption,
-                                'btn-danger': option != game.state.correctOption && game.state.answers?.[playerID] == option,
-                                'btn-secondary': option != game.state.correctOption && game.state.answers?.[playerID] != option,
+                                'btn-danger': option != game.state.correctOption && (game.state.answers?.[playerID] == option || game.state.additionalAnswers?.[playerID] == option) && (game.state.answers?.[playerID] != game.state.correctOption && game.state.additionalAnswers?.[playerID] != game.state.correctOption),
+                                'btn-secondary': option != game.state.correctOption && ((game.state.answers?.[playerID] != option || game.state.additionalAnswers?.[playerID] == game.state.correctOption) || (game.state.additionalAnswers?.[playerID] != option || game.state.answers?.[playerID] == game.state.correctOption)),
                             }"
                         x-text="option"
                     ></span>
@@ -92,8 +127,8 @@
                 <div class="d-grid mt-3">
                     <button
                         class="btn btn-primary"
-                        :disabled="game.state.continuedPlayers.includes(playerID)"
-                        @click="!game.state.continuedPlayers.includes(playerID) && $dispatch('send', { type: 'continue' })"
+                        :disabled="game.state.continuedPlayers?.includes(playerID)"
+                        @click="!game.state.continuedPlayers?.includes(playerID) && $dispatch('send', { type: 'continue' })"
                     >
                         Continue
                     </button>

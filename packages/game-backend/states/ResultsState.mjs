@@ -14,6 +14,9 @@ export class ResultsState extends State {
             answers: Object.fromEntries(
                 [...this.data.answers.entries()].map(([player, answer]) => [player.id, answer]),
             ),
+            additionalAnswers: Object.fromEntries(
+                [...this.data.additionalAnswers.entries()].map(([player, answer]) => [player.id, answer]),
+            ),
         };
     }
 

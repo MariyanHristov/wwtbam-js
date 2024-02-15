@@ -19,6 +19,9 @@ export class LeaderboardState extends State {
             answers: Object.fromEntries(
                 [...this.data.answers.entries()].map(([player, answer]) => [player.id, answer]),
             ),
+            additionalAnswers: Object.fromEntries(
+                [...this.data.additionalAnswers.entries()].map(([player, answer]) => [player.id, answer]),
+            ),
             continuedPlayers: [...this.data.continuedPlayers].map((player) => player.id),
         };
     }

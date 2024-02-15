@@ -32,6 +32,7 @@
  * @property {"useLifeline"} type
  * @property {string} gameID
  * @property {string} playerID
+ * @property {string} lifeline
  */
 
 /**
