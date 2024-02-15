@@ -8,6 +8,17 @@ const DAL = {
             createUser,
         ]);
     },
+    updateQuestionBank: function (questionBank, createUser) {
+        return query(
+            `UPDATE question_banks
+                SET title = ?,
+                    description = ?,
+                    create_user = ?
+                WHERE id = ?`,
+            [questionBank.title, questionBank.description, createUser, questionBank.id],
+        );
+    },
+
     getById: function (questionBankId) {
         return query("SELECT * FROM question_banks WHERE id = ?", [questionBankId]);
     },

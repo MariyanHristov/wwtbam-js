@@ -1,4 +1,5 @@
 import DAL from "../../DAL/question/question.mjs";
+import QuestionBankWithQuestions from "./QuestionBankWithQuestions.mjs";
 
 class Question {
     constructor(
@@ -36,6 +37,24 @@ class Question {
             throw error;
         }
     }
+
+    static async updateQuestion(question, questionBankId, createUser) {
+        try {
+            DAL.updateQuestion(question, questionBankId, createUser);
+        } catch (error) {
+            console.error("Err");
+            throw error;
+        }
+    }
+
+    static async insertQuestion(question, questionBankId, createUser) {
+        try {
+            DAL.insertQuestion(question, questionBankId, createUser);
+        } catch (error) {
+            console.error("Err");
+            throw error;
+        }
+    }
 }
 
-module.exports = Question;
+export default Question;

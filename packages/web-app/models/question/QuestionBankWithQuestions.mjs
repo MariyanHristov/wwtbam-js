@@ -1,5 +1,6 @@
 import QuestionBankDAL from "../../DAL/question/questionBank.mjs";
 import QuestionsDAL from "../../DAL/question/question.mjs";
+import QuestionTypeDAL from "../../DAL/question/questionType.mjs";
 
 class QuestionBankWithQuestions {
     constructor(id, title, description, questions) {

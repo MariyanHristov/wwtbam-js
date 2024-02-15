@@ -30,6 +30,15 @@ class QuestionBank {
             throw error;
         }
     }
+
+    static async updateQuestionBank(questionBank, createUser) {
+        try {
+            DAL.updateQuestionBank(questionBank, createUser);
+        } catch (error) {
+            console.error("Err");
+            throw error;
+        }
+    }
 }
 
-module.exports = QuestionBank;
+export default QuestionBank;
