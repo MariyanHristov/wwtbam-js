@@ -1,25 +1,20 @@
-import cookieParser from "cookie-parser";
-import { WebSocketServer } from "ws";
+import { Server } from "socket.io";
 
-import { useUser } from "./auth/use-user.mjs";
 import { createBus } from "../bus/index.mjs";
+import { parseAuthToken } from "./auth/parse-auth-token.mjs";
 
-const playerWS = new Map();
+const playerSockets = new Map();
 const playerGames = new Map();
 
-const wss = new WebSocketServer({ clientTracking: false, noServer: true });
-
-wss.on("connection", async (ws, req) => {
+async function handleConnection(socket, auth) {
     const bus = createBus();
     await bus.connect();
 
-    const playerID = req.loggedInUserID;
+    const playerID = auth.id;
 
-    playerWS.set(playerID, ws);
+    playerSockets.set(playerID, socket);
 
-    ws.on("error", console.error);
-
-    ws.on("message", async (data) => {
+    socket.on("message", async (data) => {
         const message = JSON.parse(data.toString());
 
         const gameID = playerGames.get(playerID);
@@ -48,42 +43,42 @@ wss.on("connection", async (ws, req) => {
         if (message.type === "gameState") {
             for (const [playerID, gameID] of playerGames) {
                 if (gameID === message.gameID) {
-                    playerWS.get(playerID)?.send(JSON.stringify(message));
+                    playerSockets.get(playerID)?.send(JSON.stringify(message));
                 }
             }
         }
 
         if (message.type === "removeAnswers") {
-            if (playerWS.has(message.playerID) && playerGames.get(message.playerID) === message.gameID) {
-                playerWS.get(message.playerID).send(JSON.stringify(message));
+            if (playerSockets.has(message.playerID) && playerGames.get(message.playerID) === message.gameID) {
+                playerSockets.get(message.playerID).send(JSON.stringify(message));
             }
         }
     });
 
-    ws.on("close", async () => {
-        playerWS.delete(playerID);
+    socket.on("disconnect", async () => {
+        playerSockets.delete(playerID);
         playerGames.delete(playerID);
 
         await bus.disconnect();
     });
-});
+}
 
-export function onUpgrade(req, socket, head) {
-    // Hack, we need cookies to parse the auth token.
+export function attach(server) {
+    const io = new Server(server, {
+        cors: {
+            origin: "*",
+        },
+    });
 
-    const parseCookies = cookieParser();
+    io.on("connection", (socket) => {
+        const authToken = socket.handshake.auth.token;
 
-    parseCookies(req, {}, () => {
-        useUser(req, {}, () => {
-            if (!req.loggedInUserID) {
-                socket.write("HTTP/1.1 401 Unauthorized\r\n\r\n");
-                socket.destroy();
-                return;
-            }
-
-            wss.handleUpgrade(req, socket, head, function (ws) {
-                wss.emit("connection", ws, req);
+        parseAuthToken(authToken)
+            .then((decoded) => {
+                handleConnection(socket, decoded);
+            })
+            .catch(() => {
+                socket.disconnect(true);
             });
-        });
     });
 }
