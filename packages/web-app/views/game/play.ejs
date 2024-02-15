@@ -146,7 +146,7 @@
     const authCookie = document.getElementById("auth-cookie").innerText.trim();
 
     document.addEventListener("alpine:initialized", () => {
-        const ws = new WebSocket(`ws://${location.host}/game`);
+        const ws = new WebSocket(`${location.protocol.includes("https") ? "wss" : "ws"}://${location.host}/game`);
 
         // ws.onerror =  () => {
         //     showMessage("WebSocket error");
