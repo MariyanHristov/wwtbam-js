@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import { AUTH_SECRET } from "../../env/index.mjs";
 import { query } from "../mysql.mjs";
 import { verifyNoUser } from "../auth/verify-no-user.mjs";
+import { verifyUser } from "../auth/verify-user.mjs";
 
 const router = express.Router();
 
@@ -56,6 +57,12 @@ router.post(
         res.redirect("/");
     },
 );
+
+router.get("/logout", verifyUser, (req, res) => {
+    res.clearCookie("auth", { httpOnly: true });
+
+    res.redirect("/");
+});
 
 router.get("/register", verifyNoUser, (req, res) => {
     res.render("auth/register");
