@@ -7,7 +7,13 @@ const bus = createBus();
 
 bus.on("message", (message) => {
     if (message.type === "newGame") {
-        games.set(message.id, new Game(bus, message.id, Game.selectQuestions(message.questions)));
+        const game = new Game(bus, message.id, Game.selectQuestions(message.questions));
+
+        games.set(message.id, game);
+
+        setInterval(() => {
+            game.onTick();
+        }, 1500);
     } else {
         games.get(message.gameID)?.onMessage(message);
     }

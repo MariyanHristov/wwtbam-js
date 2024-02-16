@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import { AUTH_SECRET } from "../../env/index.mjs";
 import { query } from "../mysql.mjs";
 import { verifyNoUser } from "../auth/verify-no-user.mjs";
+import { verifyUser } from "../auth/verify-user.mjs";
 
 const router = express.Router();
 
@@ -57,8 +58,14 @@ router.post(
     },
 );
 
+router.get("/logout", verifyUser, (req, res) => {
+    res.clearCookie("auth", { httpOnly: true });
+
+    res.redirect("/");
+});
+
 router.get("/register", verifyNoUser, (req, res) => {
-    res.render("auth/register");
+    res.render("auth/register", { errors: null, values: {} });
 });
 
 router.post(
@@ -72,17 +79,16 @@ router.post(
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json({
-                success: false,
-                errors: errors.array(),
-            });
+            return res.render("auth/register", { errors: errors.mapped(), values: req.body });
         }
 
         const found = await query("select count(*) as `result` from `users` where `email` = ?", [req.body.email]);
 
         if (found[0].result > 0) {
-            // user found, error
-            return res.status(400);
+            return res.render("auth/register", {
+                errors: { email: { msg: "User with that email already exists" } },
+                values: req.body,
+            });
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
