@@ -2,27 +2,20 @@
 include('../templates/navigation.ejs'); %>
 
 <div class="container mt-3">
-    <h1 class="mb-4">Create question banks</h1>
+    <h1 class="mb-4">Create question bank</h1>
 
     <form action="/question-bank/create" method="post">
-        <input type="hidden" name="id" />
-
         <div class="card mt-2">
-            <div class="card-title">General information</div>
+            <div class="card-title">
+                General information
+            </div>
             <div class="card-body">
                 <div class="col-md mt-2">
                     <div class="col-md-2">
                         <label for="title" class="form-label">Title:</label>
                     </div>
                     <div class="col-md-4">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="title"
-                            name="title"
-                            value="<%= questionBank.title %>"
-                            required
-                        />
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                 </div>
                 <div class="col-md mt-1">
@@ -30,20 +23,127 @@ include('../templates/navigation.ejs'); %>
                         <label for="description" class="form-label">Description:</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="description" name="description" />
+                        <input type="text" class="form-control" id="description" name="description">
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="card mt-2">
-            <div class="card-title">Questions</div>
-            <div class="card-body">
-                <div class="questions"></div>
-                <button type="button" class="btn btn-success">Add question</button>
+            <div class="card-title">
+                Questions
             </div>
+            <div class="card-body">
+                <div id="questions">
+                </div>
+                <div class="mt-3">
+                    <button id="add-question" type="button" class="btn btn-primary">
+                        Add question
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button id="save" type="submit" class="btn btn-success">
+                Save
+            </button>
         </div>
     </form>
 </div>
+
+<script>
+
+    let currQuestions = document.getElementsByClassName('question').length;
+    const maxQuestions = 20;
+
+    function generateQuestionHTML(index) {
+        return `<div class="card mt-1 question">
+                <div class="card-body">
+                    <div class="col-md-12 form-inline row">
+                        <div class="col-md-1">
+                            <label for="questionTitle${index}" class="form-label text-right">Title:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text"
+                                class="form-control"
+                                id="questionTitle${index}"
+                                name="questions[${index}][question_title]">
+                        </div>
+                        <div class="col-md-2 offset-md-3">
+                            <label for="questionCorrectAnswer${index}"
+                                   class="form-label text-right">
+                                       Correct Answer:
+                            </label>
+                        </div>
+                        <div class="col-md-1">
+                            <select class="form-select"
+                                    name="questions[${index}][question_correct_answer]"
+                                    id="questionCorrectAnswer${index}">
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr style="border-top: 1px solid #bbb;">
+                    <div class="col-md-12 form-inline row mt-2">
+                        <div class="col-md-1">
+                            <label for="questionAnswerA${index}" class="form-label text-right">A:</label>
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text"
+                                class="form-control"
+                                id="questionAnswerA${index}"
+                                name="questions[${index}][question_answer_a]">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-inline row mt-1">
+                        <div class="col-md-1">
+                            <label for="questionAnswerB" class="form-label text-right">B:</label>
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text"
+                                class="form-control"
+                                id="questionAnswerB${index}"
+                                name="questions[${index}][question_answer_b]">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-inline row mt-1">
+                        <div class="col-md-1">
+                            <label for="questionAnswerC${index}" class="form-label text-right">C:</label>
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text"
+                                class="form-control"
+                                id="questionAnswerC${index}"
+                                name="questions[${index}][question_answer_c]">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-inline row mt-2">
+                        <div class="col-md-1">
+                            <label for="questionAnswerD" class="form-label text-right">D:</label>
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text"
+                                class="form-control"
+                                id="questionAnswerD${index}"
+                                name="questions[${index}][question_answer_d]">
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    document.getElementById('add-question').addEventListener('click', function () {
+
+        let tempDiv = document.createElement("div");
+
+        tempDiv.innerHTML = generateQuestionHTML(currQuestions);
+
+        currQuestions++;
+
+        document.getElementById('questions').appendChild(tempDiv.firstChild);
+    });
+</script>
 
 <%- include('../templates/foot.ejs'); %>

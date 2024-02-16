@@ -2,7 +2,7 @@
 include('../templates/navigation.ejs'); %>
 
 <div class="container mt-3">
-    <h1 class="mb-4">Create question banks</h1>
+    <h1 class="mb-4">Edit question bank</h1>
 
     <form action="/question-bank/edit" method="post">
         <input type="hidden" name="id" value="<%= questionBank.id %>">
@@ -12,18 +12,18 @@ include('../templates/navigation.ejs'); %>
                 General information
             </div>
             <div class="card-body">
-                <div class="col-md mt-2">
+                <div class="col-md mt-2 row">
                     <div class="col-md-2">
-                        <label for="title" class="form-label">Title:</label>
+                        <label for="title" class="form-label text-right">Title:</label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="title" name="title"
                                value="<%= questionBank.title %>" required>
                     </div>
                 </div>
-                <div class="col-md mt-1">
+                <div class="col-md mt-1 row">
                     <div class="col-md-2">
-                        <label for="description" class="form-label">Description:</label>
+                        <label for="description" class="form-label text-right">Description:</label>
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="description" name="description"

@@ -3,10 +3,26 @@
 <div class="container mt-3">
     <h1 class="mb-4">Question banks</h1>
 
-    <button type="button" class="btn btn-success">
+    <a href="/question-bank/create" class="btn btn-success">
         Create question bank
         <i class="bi bi-plus-square"></i>
-    </button>
+    </a>
+    <div class="col-md row">
+        <% questionBanks.forEach(function(questionBank, iter) { %>
+            <a href="/question-bank/edit/<%= questionBank.id %>">
+                <div class="card col-md-3 mt-1">
+                    <div class="card-title">
+                        <input class="form-check-input" type="checkbox">
+                        <h2><%= questionBank.title %></h2>
+                    </div>
+                    <div class="card-body">
+                        <h4><%= questionBank.description %></h4>
+                    </div>
+                </div>
+            </a>
+        <% }); %>
+    </div>
+
 </div>
 
 <%- include('../templates/foot.ejs'); %>

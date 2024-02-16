@@ -33,9 +33,27 @@ class QuestionBank {
 
     static async updateQuestionBank(questionBank, createUser) {
         try {
-            DAL.updateQuestionBank(questionBank, createUser);
+            await DAL.updateQuestionBank(questionBank, createUser);
         } catch (error) {
             console.error("Err");
+            throw error;
+        }
+    }
+
+    static async insertQuestionBank(questionBank, createUser) {
+        try {
+            return await DAL.insertQuestionBank(questionBank, createUser);
+        } catch (error) {
+            console.log("Err");
+            throw error;
+        }
+    }
+
+    static async getAllQuestionBanks() {
+        try {
+            return await DAL.getAllQuestionBanks();
+        } catch (error) {
+            console.log("Err");
             throw error;
         }
     }
