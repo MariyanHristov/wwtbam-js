@@ -1,6 +1,4 @@
-import jwt from "jsonwebtoken";
-
-import { AUTH_SECRET } from "../../env/index.mjs";
+import { parseAuthToken } from "./parse-auth-token.mjs";
 
 export function useUser(req, res, next) {
     // Locals for use in views
@@ -14,8 +12,8 @@ export function useUser(req, res, next) {
         return next();
     }
 
-    jwt.verify(authCookie, AUTH_SECRET, (error, decoded) => {
-        if (!error) {
+    parseAuthToken(authCookie)
+        .then((decoded) => {
             // Save to request for use in routes
             req.loggedInUserID = decoded.id;
             req.loggedInUserData = decoded;
@@ -23,8 +21,10 @@ export function useUser(req, res, next) {
             // Save as locals for use in views
             res.locals.loggedInUserID = decoded.id;
             res.locals.loggedInUserData = decoded;
-        }
 
-        next();
-    });
+            next();
+        })
+        .catch(() => {
+            next();
+        });
 }

@@ -1,5 +1,6 @@
+import { createServer } from "http";
 import path from "path";
-import { fileURLToPath, URL } from "url";
+import { fileURLToPath } from "url";
 
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -12,7 +13,7 @@ import homeRouter from "./routes/home.mjs";
 import questionBankBrowseRouter from "./routes/question-bank-browse.mjs";
 import questionBankRouter from "./routes/question-bank.mjs";
 import userRouter from "./routes/user.mjs";
-import { onUpgrade as onUpgradeToGame } from "./web-connector.mjs";
+import { attach as attachWebConnector } from "./web-connector.mjs";
 import { useUser } from "./auth/use-user.mjs";
 
 const app = express();
@@ -37,14 +38,10 @@ app.use("/question-bank", questionBankRouter);
 app.use("/game", gameRouter);
 app.use("/", homeRouter);
 
-const server = app.listen(APP_PORT, () => {
+const server = createServer(app);
+
+server.listen(APP_PORT, () => {
     console.log(`Listening on port ${APP_PORT}`);
 });
 
-server.on("upgrade", (req, socket, head) => {
-    const { pathname } = new URL(req.url, `${req.protocol}://${req.headers.host}/`);
-
-    if (pathname === "/game") {
-        onUpgradeToGame(req, socket, head);
-    }
-});
+attachWebConnector(server);

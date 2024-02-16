@@ -1,6 +1,11 @@
 <% title = 'Game' %> <%- include('../templates/head.ejs'); %> <%- include('../templates/navigation.ejs'); %>
 
 <script src="//unpkg.com/alpinejs" defer></script>
+<script
+    src="https://cdn.socket.io/4.7.4/socket.io.min.js"
+    integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"
+    crossorigin="anonymous"
+></script>
 
 <div
     class="container mt-3"
@@ -146,27 +151,27 @@
     const authCookie = document.getElementById("auth-cookie").innerText.trim();
 
     document.addEventListener("alpine:initialized", () => {
-        const ws = new WebSocket(`${location.protocol.includes("https") ? "wss" : "ws"}://${location.host}/game`);
+        const socket = io(window.location.host, {
+            auth: {
+                token: authCookie,
+            },
+        });
 
-        // ws.onerror =  () => {
-        //     showMessage("WebSocket error");
-        // };
-
-        ws.onopen = () => {
+        socket.on("connect", () => {
             const url = new URL(window.location.href);
             const gameID = url.pathname.slice(url.pathname.lastIndexOf("/") + 1);
 
-            ws.send(
+            socket.send(
                 JSON.stringify({
                     type: "joinGame",
                     data: authCookie,
                     gameID,
                 }),
             );
-        };
+        });
 
-        ws.onmessage = (event) => {
-            const message = JSON.parse(event.data);
+        socket.on("message", (json) => {
+            const message = JSON.parse(json);
 
             window.dispatchEvent(
                 new CustomEvent(message.type.toLowerCase(), {
@@ -174,18 +179,13 @@
                 }),
             );
 
+            // Debug console.log for easier presentation
             console.log(message);
-        };
-
-        window.addEventListener("send", (event) => {
-            ws.send(JSON.stringify(event.detail));
         });
 
-        // ws.onclose = () => {
-        //     showMessage("WebSocket connection closed");
-        // };
-
-        window.ws = ws;
+        window.addEventListener("send", (event) => {
+            socket.send(JSON.stringify(event.detail));
+        });
     });
 </script>
 
