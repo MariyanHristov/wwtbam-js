@@ -51,6 +51,13 @@ const DAL = {
     getQuestionsByQuestionBankId: function (questionBankId) {
         return query("SELECT * FROM questions WHERE question_bank_id = ?", [questionBankId]);
     },
+
+    getQuestionsByQuestionBankIds: function (questionBankIds) {
+
+        const placeholders = questionBankIds.map(() => '?').join(',');
+
+        return query("SELECT * FROM questions WHERE question_bank_id IN (?)", [placeholders]);
+    }
 };
 
 export default DAL;

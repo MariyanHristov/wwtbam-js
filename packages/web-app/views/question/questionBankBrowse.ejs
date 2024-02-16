@@ -7,12 +7,13 @@
         Create question bank
         <i class="bi bi-plus-square"></i>
     </a>
+    <button type="button" class="btn btn-primary" id="startGame">Start game</button>
     <div class="col-md row">
         <% questionBanks.forEach(function(questionBank, iter) { %>
             <a href="/question-bank/edit/<%= questionBank.id %>">
                 <div class="card col-md-3 mt-1">
                     <div class="card-title">
-                        <input class="form-check-input" type="checkbox">
+                        <input class="form-check-input" type="checkbox" data-questionbankid="<%= questionBank.id %>">
                         <h2><%= questionBank.title %></h2>
                     </div>
                     <div class="card-body">
@@ -26,3 +27,26 @@
 </div>
 
 <%- include('../templates/foot.ejs'); %>
+
+<script>
+    document.getElementById('startGame').addEventListener('click', function() {
+        let questionBankIds = [];
+        let checkboxes = document.querySelectorAll('.form-check-input:checked');
+        checkboxes.forEach(function(checkbox) {
+            questionBankIds.push(checkbox.getAttribute('data-questionbankid'));
+        });
+
+        // Posting questionBankIds to /new endpoint
+        fetch('/game/new', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ questionBankIds: questionBankIds })
+        }).then(function(response) {
+            console.log('Game started');
+        }).catch(function(error) {
+            console.error('Error:', error);
+        });
+    });
+</script>
