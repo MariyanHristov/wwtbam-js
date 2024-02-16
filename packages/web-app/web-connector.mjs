@@ -22,7 +22,7 @@ async function handleConnection(socket, auth) {
         // Can only joinGame at the beginning
         if (!gameID) {
             if (message.type === "joinGame") {
-                await bus.send({ ...message, playerID });
+                await bus.send({ ...message, playerID, data: auth });
                 playerGames.set(playerID, message.gameID);
             }
 

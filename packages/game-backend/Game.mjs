@@ -1,9 +1,7 @@
 import { Set as ImmutableSet } from "immutable";
-import jwt from "jsonwebtoken";
 import { LobbyState } from "./states/LobbyState.mjs";
 import { Player } from "./Player.mjs";
 import { choose, shuffle } from "./random.mjs";
-import { AUTH_SECRET } from "../env/index.mjs";
 
 export class Game {
     id;
@@ -49,17 +47,12 @@ export class Game {
         try {
             if (message.type === "joinGame") {
                 // New players have to be handled specially as they also update the Game
-
-                jwt.verify(message.data, AUTH_SECRET, (error, decoded) => {
-                    if (!error) {
-                        this.#joinGame(
-                            message.playerID,
-                            Object.fromEntries(
-                                ["name", "family_name", "city", "country"].map((key) => [key, decoded[key]]),
-                            ),
-                        );
-                    }
-                });
+                this.#joinGame(
+                    message.playerID,
+                    Object.fromEntries(
+                        ["name", "family_name", "city", "country"].map((key) => [key, message.data[key]]),
+                    ),
+                );
             } else {
                 const callbackName = `on${message.type.slice(0, 1).toUpperCase()}${message.type.slice(1)}Message`;
                 const player = this.players.find((player) => player.id === message.playerID);
