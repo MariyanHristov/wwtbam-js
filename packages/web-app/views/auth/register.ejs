@@ -5,19 +5,31 @@
     <form action="/auth/register" method="post">
         <div class="mb-3">
             <label for="form-first-name" class="form-label">First name</label>
-            <input type="text" name="first_name" class="form-control" id="form-first-name" />
+            <input type="text" name="first_name" class="form-control" id="form-first-name" value="<%= values.first_name %>" />
+        <% if(errors?.first_name) { %>
+            <div class="p-3 mt-2 bg-danger text-white"><%= errors.first_name.msg %></div>
+        <% } %>
         </div>
         <div class="mb-3">
             <label for="form-last-name" class="form-label">Last name</label>
-            <input type="text" name="last_name" class="form-control" id="form-last-name" />
+            <input type="text" name="last_name" class="form-control" id="form-last-name" value="<%= values.last_name %>" />
+        <% if(errors?.last_name) { %>
+            <div class="p-3 mt-2 bg-danger text-white"><%= errors.last_name.msg %></div>
+        <% } %>
         </div>
         <div class="mb-3">
             <label for="form-email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" id="form-email" />
+            <input type="email" name="email" class="form-control" id="form-email" value="<%= values.email %>" />
+        <% if(errors?.email) { %>
+            <div class="p-3 mt-2 bg-danger text-white"><%= errors.email.msg %></div>
+        <% } %>
         </div>
         <div class="mb-3">
             <label for="form-password" class="form-label">Password</label>
             <input type="password" name="password" class="form-control" id="form-password" />
+        <% if(errors?.password) { %>
+            <div class="p-3 mt-2 bg-danger text-white"><%= errors.password.msg %></div>
+        <% } %>
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
