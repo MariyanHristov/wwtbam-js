@@ -66,6 +66,16 @@ export class Game {
         }
     }
 
+    onTick() {
+        // Periodically refresh game state for all clients
+        if (this.lastUpdate) {
+            this.bus.send({
+                type: "gameState",
+                ...this.lastUpdate,
+            });
+        }
+    }
+
     #setState(ctor, ...args) {
         const state = new ctor(
             {
