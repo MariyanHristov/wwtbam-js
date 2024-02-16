@@ -7,8 +7,8 @@ import fs from "fs";
 import { v4 as uuid } from "uuid";
 import { createBus } from "../../bus/index.mjs";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
-import  Question  from "../models/question/Question.mjs"
+import { dirname, format } from "path";
+import Question from "../models/question/Question.mjs";
 
 const router = express.Router();
 
@@ -17,33 +17,41 @@ router.get("/", verifyUser, (req, res) => {
 });
 
 router.post("/new", verifyUser, async (req, res) => {
+    const questions = await Promise.all(
+        req.body.questionBankIds.map(Number).map(async (id) => {
+            const rows = await Question.getAllByQuestionBankId(id);
+
+            return rows.map((row) => {
+                const options = [
+                    row.question_answer_a,
+                    row.question_answer_b,
+                    row.question_answer_c,
+                    row.question_answer_d,
+                ];
+
+                return {
+                    question: row.question_title,
+                    options,
+                    correctOption: options[row.question_correct_answer - 1],
+                };
+            });
+        }),
+    );
 
     const bus = createBus();
     await bus.connect();
 
-    const dir = `${dirname(dirname(dirname(dirname(fileURLToPath(import.meta.url)))))}/misc`;
-
     const id = uuid();
-
-    const questionBankIds = req.body.questionBankIds;
-
-    console.log(questionBankIds);
-
-    const questions = await Question.getAllByQuestionBankIds(questionBankIds);
-
-    console.log(questions);
 
     await bus.send({
         type: "newGame",
         id,
-        questions: fs
-            .readdirSync(`${dir}/questions`)
-            .map((name) => JSON.parse(String(fs.readFileSync(`${dir}/questions/${name}`)))),
+        questions,
     });
 
-    await bus.disconnect();
-
     res.redirect(303, `/game/${id}`);
+
+    await bus.disconnect();
 });
 
 router.get("/:id", verifyUser, (req, res) => {

@@ -38,21 +38,6 @@ class Question {
         }
     }
 
-    static async getAllByQuestionBankIds(questionBankIds, callbacl) {
-        try {
-            const result = await DAL.getQuestionsByQuestionBankIds(questionBankIds);
-
-            if (result.length === 0) {
-                return null;
-            }
-
-            return result;
-        } catch (error) {
-            console.error("Err");
-            throw error;
-        }
-    }
-
     static async updateQuestion(question, questionBankId, createUser) {
         try {
             DAL.updateQuestion(question, questionBankId, createUser);
